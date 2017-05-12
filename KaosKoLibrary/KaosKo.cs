@@ -1,4 +1,4 @@
-﻿namespace KaosKoLIbrary
+﻿namespace KaosKoLibrary
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -25,6 +25,15 @@
         public KaosKo(Func<string, int> hashCodeFunc, string seed)
         {
             _rand = new Random(hashCodeFunc(seed));
+        }
+
+        /// <summary>This method returns a randomised boolean.
+        /// The code is copied with pride from https://msdn.microsoft.com/en-us/library/system.random(v=vs.110).aspx#Boolean
+        /// </summary>
+        /// <returns></returns>
+        public bool Bool()
+        {
+            return Convert.ToBoolean(_rand.Next(0, 2));
         }
 
         /// <summary>This method creates a new GUIDish value.

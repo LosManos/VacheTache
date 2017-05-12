@@ -2,7 +2,7 @@ namespace KaosKoLibraryTest
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using KaosKoLIbrary;
+    using KaosKoLibrary;
     using System.Linq;
 
     [TestClass]
@@ -74,10 +74,19 @@ namespace KaosKoLibraryTest
 
         #endregion
 
+        #region Bool tests.
+
+        [TestMethod]
+        public void Bool_ReturnBool()
+        {
+            //  #   Arrange
+        }
+        #endregion
+
         #region Guid tests.
 
         [TestMethod]
-        public void Guid_ReturnValueGuid()
+        public void Guid_ReturnValidGuid()
         {
             //  #   Arrange.
             var sut = new KaosKo();
