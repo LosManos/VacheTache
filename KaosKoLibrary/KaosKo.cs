@@ -36,6 +36,33 @@
             return Convert.ToBoolean(_rand.Next(0, 2));
         }
 
+        /// <summary>This method returns a pseudo random Date.
+        /// The lowest returned date it DateTime.MinValue
+        /// and the highest is DateTime.MaxValue.AddDays(-1).
+        /// It returns a Date with time set to 00:00:00
+        /// </summary>
+        /// <returns></returns>
+        public DateTime Date()
+        {
+            return Date(DateTime.MinValue, DateTime.MaxValue);
+        }
+
+        /// <summary>This method returns a pseudo random Date within an interval
+        /// where the result is equal or greater than from
+        /// and lesser than to.
+        /// Note that the to value is not included. This equals the functionality of System.Random.Next().
+        /// It returns a Date with time set to 00:00:00
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public DateTime Date(DateTime from, DateTime to)
+        {
+            int dayRange = (to - from).Days;
+
+            return from.AddDays(_rand.NextDouble() * dayRange).Date;
+        }
+
         /// <summary>This method creates a new GUIDish value.
         /// It is not a proper GUID as a such adheres to certain rules, for instance there are presently 4 different GUID versions and the generating of randomised values below does not take this into consideration.
         /// The code is copied from http://stackoverflow.com/a/13188409/521554

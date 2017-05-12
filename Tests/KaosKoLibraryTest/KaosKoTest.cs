@@ -96,6 +96,48 @@ namespace KaosKoLibraryTest
 
         #endregion
 
+        #region Date tests.
+
+        [TestMethod]
+        public void Date_ReturnDate()
+        {
+            //  Without doing lots of calls there is not much we can test here.
+            //  So lets fall back to calling it to make sure we have tested the interface.
+
+            //  #   Arrange.
+            var sut = new KaosKo();
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Date();
+                Assert.IsTrue(DateTime.MinValue <= res && res < DateTime.MaxValue);
+            }
+        }
+
+        [TestMethod]
+        public void Date_FromAndTo_ReturnDateBetween()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo();
+            var Min = new DateTime(2017, 05, 12);
+            var Max = new DateTime(2018, 06, 10);
+            var results = new int[(Max - Min).Days];
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Date(Min, Max);
+                Assert.IsTrue(Min <= res && res < Max);
+                results[(res - Min).Days] += 1;
+            }
+
+            Assert.IsTrue(results.All(r => r >= 1),
+                "If we are iterating that many times it would be strange if not both true and false was returned at least once.");
+        }
+
+        #endregion
+
         #region Guid tests.
 
         [TestMethod]
