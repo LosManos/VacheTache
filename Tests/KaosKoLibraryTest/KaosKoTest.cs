@@ -79,8 +79,21 @@ namespace KaosKoLibraryTest
         [TestMethod]
         public void Bool_ReturnBool()
         {
-            //  #   Arrange
+            //  #   Arrange.
+            var sut = new KaosKo();
+            var results = new int[2];
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Bool();
+                results[res ? 1 : 0] += 1;
+            }
+
+            Assert.IsTrue(results.All(r => r >= 1), 
+                "If we are iterating that many times it would be strange if not both true and false was returned at least once.");
         }
+
         #endregion
 
         #region Guid tests.
@@ -91,11 +104,12 @@ namespace KaosKoLibraryTest
             //  #   Arrange.
             var sut = new KaosKo();
 
-            //  #   Act.
-            var res = sut.Guid();
-
-            //  #   Assert.
-            Assert.IsTrue(Guid.TryParse(res.ToString(), out _));
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Guid();
+                Assert.IsTrue(Guid.TryParse(res.ToString(), out _));
+            }
         }
 
         #endregion
@@ -140,7 +154,7 @@ namespace KaosKoLibraryTest
 
             Assert.IsTrue(
                 results.All(r => r >= 1),
-                "If we are iterating that many times it would be strange if not all integers was returns at least once.");
+                "If we are iterating that many times it would be strange if not all integers was returned at least once.");
         }
 
         #endregion
