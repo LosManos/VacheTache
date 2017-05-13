@@ -33,6 +33,10 @@ There are overloaded methods creating a date in an interval.
 ### DateAndTime
 This method returns a date and time where time is hours, minutes and seconds. Anything finer grained than a second is 0.
 
+### Decimal
+This method returns a (C#) [decimal](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/keywords/decimal).  
+There is *not* an overloaded method for creating a decimal in an interval.
+
 ### Guid
 This method returns a GUID.  
 Note that the value might not be valid GUID according to the [5 variants](https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions) there are.  
@@ -40,7 +44,7 @@ Dotnet and Sqlserver recognises it though because 128bits are 128 bits.
 
 ### Int
 This method returns a 32 bit signed integer.  
-There are overloaded methods creating an integer in an interval.
+There is an overloaded method creating an integer in an interval.
 
 ### PositiveInt
 This method returns a 32 bit positive integer. 0 is not considered a positive number.  

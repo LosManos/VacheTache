@@ -26,7 +26,23 @@ namespace KaosKoLibraryTest
         }
 
         [TestMethod]
-        public void KaosKo_HashCodeFunc_NewMethod_UseIt()
+        public void KaosKo_NoSeed_ReturnDifferentResult()
+        {
+            //  #   Arrange.
+            var sut1 = new KaosKo();
+            System.Threading.Thread.Sleep(1);
+            var sut2 = new KaosKo();
+
+            //  #   Act.
+            var res1 = sut1.PositiveInt();
+            var res2 = sut2.PositiveInt();
+
+            //  #   Assert.
+            Assert.AreNotEqual(res1, res2);
+        }
+
+        [TestMethod]
+        public void KaosKo_HashCodeFunc_CustomMethod_UseIt()
         {
             //  #   Arrange.
             // Create a hashing function that always returns the same hash code.
@@ -65,7 +81,7 @@ namespace KaosKoLibraryTest
         public void Bool_ReturnBool()
         {
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
             var results = new int[2];
 
             //  #   Act and Assert.
@@ -90,7 +106,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -104,7 +120,7 @@ namespace KaosKoLibraryTest
         public void Date_FromAndTo_ReturnDateBetween()
         {
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
             var Min = new DateTime(2017, 05, 12);
             var Max = new DateTime(2018, 06, 10);
             var results = new int[(Max - Min).Days];
@@ -132,7 +148,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -144,13 +160,53 @@ namespace KaosKoLibraryTest
 
         #endregion
 
+        #region Decimal tests.
+
+        [TestMethod]
+        public void Decimal_ReturnDecimal()
+        {
+            //  Without doing lots of calls there is not much we can test here.
+            //  So lets fall back to calling it to make sure we have tested the interface.
+
+            //  #   Arrange.
+            var sut = new KaosKo(42);
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Decimal();
+                Assert.IsTrue(Decimal.MinValue <= res && res < Decimal.MaxValue);
+            }
+        }
+
+        // This method does not work. Uncomment this test code and associated code and see it fails.
+        //[TestMethod]
+        //public void Decimal_Interval_ReturnDecimalBetween()
+        //{
+        //    //  #   Arrange.
+        //    var sut = new KaosKo(42);
+        //    const decimal Min = -1.234m;
+        //    const decimal Max = 2.345m;
+
+        //    //  #   Act and Assert.
+        //    for (int i = 0; i < 1_000_000; i++)
+        //    {
+        //        var res = sut.Decimal(Min, Max);
+        //        Assert.IsTrue(
+        //            Min <= res && res < Max, 
+        //            $"The value {res} is not greater than or equal to {Min} and less than {Max} in iteration {i}.");
+        //    }
+        //}
+
+        #endregion
+
         #region Guid tests.
 
         [TestMethod]
         public void Guid_ReturnValidGuid()
         {
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -171,7 +227,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -185,7 +241,7 @@ namespace KaosKoLibraryTest
         public void Int_MinAndMax_ReturnBetweenInclusiveMinAndExclusiveMax()
         {
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
             const int Min = -12;
             const int Max = 420;
             var results = new int[Max-Min];
@@ -229,7 +285,7 @@ namespace KaosKoLibraryTest
         public void PositiveInt_ReturnPositive()
         {
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
 
             //  #   Act and assert.
             for (int i = 0; i <= 1_000_000; i++)
@@ -243,7 +299,7 @@ namespace KaosKoLibraryTest
         public void PositiveInt_Max_ReturnBelow()
         {
             //  #   Arrange.
-            var sut = new KaosKo();
+            var sut = new KaosKo(42);
             const int Max = 420;
             var results = new int[Max-1];
 

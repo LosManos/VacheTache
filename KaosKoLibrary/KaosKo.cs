@@ -72,6 +72,52 @@
             return Date().AddHours(this.Int(0, 23)).AddMinutes(this.Int(0, 59)).AddSeconds(this.Int(0, 59));
         }
 
+        /// <summary>This method returns a random decimal.
+        /// Now decimals can be Very large and Very small and using them with == is seldom a good idea.
+        /// The result is not evenly distributed.
+        /// Maybe we should use NextDecimal from https://numerics.mathdotnet.com/Random.html instead?
+        /// </summary>
+        /// <returns></returns>
+        public decimal Decimal()
+        {
+            // This solution is thought through and not only copied from Stack overflow.
+            var bits = new Int32[4];
+            bits[0] = _rand.Next();
+            bits[1] = _rand.Next();
+            bits[2] = _rand.Next();
+            bits[3] = _rand.Next();
+
+            // According to https://msdn.microsoft.com/en-us/library/t1de0ya1.aspx the decimal has a certain layout
+            // where some bits must be 0. Hence we have to mask the 4th int32-part.
+            // We have a known issue where "Bits 16 to 23 must contain an exponent between 0 and 28, which indicates the power of 10 to divide the integer number."
+            // As for now I was satisfied to limiting it to 16 and not 28. /OF
+            // If you want to play with the mask, use this string as it is split into the parts mentioned in the documentation linked above.
+            var mask = Convert.ToInt32("10000000000011110000000000000000", 2);
+            bits[3] = bits[3] & mask;
+
+            // Due to some reason I haven't figured out the MSb is never randomised. So we do it here.
+            // Are there more bits that are not randomised?
+            var sign = Bool() ? 1 : -1;
+
+            return new decimal(bits) * sign;
+        }
+
+        // This method does not work. Uncomment this code and associated test and see it fails.
+        ///// <summary>This method returns a decimal between minValue and maxValue, maxValue not included.
+        ///// The result is not evenly distributed.
+        ///// <para>
+        ///// The code is copied from http://stackoverflow.com/a/28860710/521554
+        ///// and not thoroughly tested.
+        ///// </para>            
+        ///// </summary>
+        ///// <param name="minValue"></param>
+        ///// <param name="maxValue"></param>
+        ///// <returns></returns>
+        //public decimal Decimal(decimal minValue, decimal maxValue)
+        //{
+        //    return Math.Abs(Decimal()) % (maxValue - minValue) + minValue;
+        //}
+
         /// <summary>This method creates a new GUIDish value.
         /// It is not a proper GUID as a such adheres to certain rules, for instance there are presently 4 different GUID versions and the generating of randomised values below does not take this into consideration.
         /// The code is copied from http://stackoverflow.com/a/13188409/521554

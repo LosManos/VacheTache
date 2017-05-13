@@ -40,7 +40,7 @@
         }
 
         [TestMethod]
-        public void PseudoRandom_HashCodeFunc_NewMethod_UseIt()
+        public void PseudoRandom_HashCodeFunc_CustomMethod_UseIt()
         {
             //  #   Arrange.
             // Create a hashing function that always returns the same hash code.
