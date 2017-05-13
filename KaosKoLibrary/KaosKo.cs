@@ -37,7 +37,7 @@
             return Convert.ToBoolean(_rand.Next(0, 2));
         }
 
-        /// <summary>This method returns a pseudo random Date.
+        /// <summary>This method returns a random Date.
         /// The lowest returned date it DateTime.MinValue
         /// and the highest is DateTime.MaxValue.AddDays(-1).
         /// It returns a Date with time set to 00:00:00
@@ -48,7 +48,7 @@
             return Date(DateTime.MinValue, DateTime.MaxValue);
         }
 
-        /// <summary>This method returns a pseudo random Date within an interval
+        /// <summary>This method returns a random Date within an interval
         /// where the result is equal or greater than from
         /// and lesser than to.
         /// Note that the to value is not included. This equals the functionality of System.Random.Next().
@@ -62,6 +62,14 @@
             int dayRange = (to - from).Days;
 
             return from.AddDays(_rand.NextDouble() * dayRange).Date;
+        }
+
+        /// <summary>This method returns a random Date and Time.
+        /// </summary>
+        /// <returns></returns>
+        public DateTime DateAndTime()
+        {
+            return Date().AddHours(this.Int(0, 23)).AddMinutes(this.Int(0, 59)).AddSeconds(this.Int(0, 59));
         }
 
         /// <summary>This method creates a new GUIDish value.

@@ -96,7 +96,7 @@ namespace KaosKoLibraryTest
             for (int i = 0; i < 1_000_000; i++)
             {
                 var res = sut.Date();
-                Assert.IsTrue(DateTime.MinValue <= res && res < DateTime.MaxValue);
+                Assert.IsTrue(DateTime.MinValue.Date <= res && res < DateTime.MaxValue.Date);
             }
         }
 
@@ -119,6 +119,27 @@ namespace KaosKoLibraryTest
 
             Assert.IsTrue(results.All(r => r >= 1),
                 "If we are iterating that many times it would be strange if not both true and false was returned at least once.");
+        }
+
+        #endregion
+
+        #region DateAndTime tests.
+
+        [TestMethod]
+        public void DateAndTime_ReturnDateAndTime()
+        {
+            //  Without doing lots of calls there is not much we can test here.
+            //  So lets fall back to calling it to make sure we have tested the interface.
+
+            //  #   Arrange.
+            var sut = new KaosKo();
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.DateAndTime();
+                Assert.IsTrue(DateTime.MinValue <= res && res < DateTime.MaxValue);
+            }
         }
 
         #endregion

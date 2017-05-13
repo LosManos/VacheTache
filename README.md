@@ -30,15 +30,18 @@ This method resturns a randomised boolean value.
 This method returns a date with time set to midnight.  
 There are overloaded methods creating a date in an interval.
 
+### DateAndTime
+This method returns a date and time where time is hours, minutes and seconds. Anything finer grained than a second is 0.
+
 ### Guid
-This method returns a guid.  
-Note that the value might not be valid guid according to the [5 variants](https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions) there are.  
+This method returns a GUID.  
+Note that the value might not be valid GUID according to the [5 variants](https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions) there are.  
 Dotnet and Sqlserver recognises it though because 128bits are 128 bits.
 
 ### Int
-This method returns a 32 bit integer.  
+This method returns a 32 bit signed integer.  
 There are overloaded methods creating an integer in an interval.
 
 ### PositiveInt
-This method returns a 32 bit positive integer. 0 is not considered a positive number.
+This method returns a 32 bit positive integer. 0 is not considered a positive number.  
 There are overlaoded methods creating a postivite integer in an interval.
