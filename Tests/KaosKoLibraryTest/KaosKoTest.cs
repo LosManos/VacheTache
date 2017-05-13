@@ -14,8 +14,8 @@ namespace KaosKoLibraryTest
         public void KaosKo_DifferentSeed_ReturnDifferentResult()
         {
             //  #   Arrange.
-            var sut1 = new KaosKo("Seed1");
-            var sut2 = new KaosKo("Seed2");
+            var sut1 = new KaosKo(1);
+            var sut2 = new KaosKo(2);
 
             //  #   Act.
             var res1 = sut1.PositiveInt();
@@ -26,30 +26,15 @@ namespace KaosKoLibraryTest
         }
 
         [TestMethod]
-        public void KaosKo_NoSeed_UseCallerName()
-        {
-            //  #   Arrange.
-            var sutKnownSeed = new KaosKo(nameof(KaosKo_NoSeed_UseCallerName));
-            var sutMethodSeed = new KaosKo();
-
-            //  #   Act.
-            var knownSeedResult = sutKnownSeed.PositiveInt();
-            var methodSeedResult = sutMethodSeed.PositiveInt();
-
-            //  #   Assert.
-            Assert.AreEqual(knownSeedResult, methodSeedResult);
-        }
-
-        [TestMethod]
         public void KaosKo_HashCodeFunc_NewMethod_UseIt()
         {
             //  #   Arrange.
             // Create a hashing function that always returns the same hash code.
-           var hashingFunction = new Func<string, int>(s => 0);
+           var hashingFunction = new Func<int, int>(s => 0);
 
             //  #   Act.
-            var res1 = new KaosKo(hashingFunction, "a seed").PositiveInt();
-            var res2 = new KaosKo(hashingFunction, "another seed").PositiveInt();
+            var res1 = new KaosKo(hashingFunction, 42).PositiveInt();
+            var res2 = new KaosKo(hashingFunction, 43).PositiveInt();
 
             //  #   Assert.
             Assert.AreEqual(res1, res2);
@@ -60,7 +45,7 @@ namespace KaosKoLibraryTest
         public void KaosKo_SameSeed_ReturnSameResult()
         {
             //  #   Arrange.
-            const string Seed = "MySeed";
+            const long Seed = 42;
             var sut1 = new KaosKo(Seed);
             var sut2 = new KaosKo(Seed);
 
@@ -182,16 +167,16 @@ namespace KaosKoLibraryTest
             var sut = new KaosKo();
             const int Min = -12;
             const int Max = 420;
-            var results = new int[Max];
+            var results = new int[Max-Min];
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
             {
-                var res = sut.PositiveInt(Max);
+                var res = sut.Int(Min, Max);
                 Assert.IsTrue(Min <= res && res < Max);
 
                 //  Keep a tab on how many times each integer value was returned.
-                results[res] += 1;
+                results[res-Min] += 1;
             }
 
             Assert.IsTrue(
@@ -207,14 +192,14 @@ namespace KaosKoLibraryTest
         public void PoistiveInt_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo("MySeed");
+            var sut = new KaosKo(42);
 
             //  #   Act.
             var res = new[] { sut.PositiveInt(), sut.PositiveInt(), sut.PositiveInt() };
 
             //  #   Assert.
             CollectionAssert.AreEqual(
-                new[] { 644677688, 1890600396, 597045847 },
+                new[] { 1434747710, 302596119, 269548474 },
                 res,
                 $"Values were [{res[0]},{res[1]},{res[2]}].");
         }
@@ -229,7 +214,7 @@ namespace KaosKoLibraryTest
             for (int i = 0; i <= 1_000_000; i++)
             {
                 var res = sut.PositiveInt();
-                Assert.IsTrue(0 <= res && res <= int.MaxValue);
+                Assert.IsTrue(1<= res && res <= int.MaxValue);
             }
         }
 
@@ -239,16 +224,16 @@ namespace KaosKoLibraryTest
             //  #   Arrange.
             var sut = new KaosKo();
             const int Max = 420;
-            var results = new int[Max];
+            var results = new int[Max-1];
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
             {
                 var res = sut.PositiveInt(Max);
-                Assert.IsTrue(0 <= res && res < Max);
+                Assert.IsTrue(1 <= res && res < Max);
 
                 //  Keep a tab on how many times each integer value was returned.
-                results[res] += 1; 
+                results[res-1] += 1; 
             }
 
             Assert.IsTrue(

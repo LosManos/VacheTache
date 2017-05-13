@@ -5,26 +5,27 @@
 
     public class KaosKo
     {
-        private Random _rand;
+        protected Random _rand;
 
         /// <summary>This constructor behaves like he default constructor
         /// and is used for seeding the random values with a known seed.
         /// </summary>
         /// <param name="seed">Optional. 
-        /// If left out the caller's method name is used for seeding the randomising.
-        /// If provided the parameters is hashed and then used for seeding the randomising.</param>
-        public KaosKo([CallerMemberName] string seed = null)
-            : this(HashCode, seed)
+        /// If left out DateTime.UtcNow.Ticks is used for seeding the randomising.
+        /// If provided the parameter is used for seeding the randomising.</param>
+        public KaosKo(long? seed = null)
+            : this(HashCode, seed ?? DateTime.UtcNow.Ticks)
         {
         }
 
-        /// <summary>This constructor is used for using an own method for hashing the seed.
+        /// <summary>This constructor is used for using a custom method for hashing the seed.
         /// </summary>
         /// <param name="hashCodeFunc"></param>
         /// <param name="seed"></param>
-        public KaosKo(Func<string, int> hashCodeFunc, string seed)
+        public KaosKo(Func<int, int> hashCodeFunc, long seed)
         {
-            _rand = new Random(hashCodeFunc(seed));
+            var intSeed = unchecked((int)seed);
+            _rand = new Random(hashCodeFunc(intSeed));
         }
 
         /// <summary>This method returns a randomised boolean.
@@ -119,7 +120,7 @@
         /// <returns></returns>
         public int PositiveInt(int maxValue)
         {
-            return _rand.Next(maxValue);
+            return _rand.Next(maxValue-1)+1;
         }
 
         /// <summary>This is a (simple) hash algorithm.
@@ -128,17 +129,11 @@
         /// <seealso cref="http://stackoverflow.com/q/41183507/521554"/>
         /// <seealso cref="https://docs.microsoft.com/en-us/dotnet/api/system.string.gethashcode?view=netcore-1.1"/>
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="n"></param>
         /// <returns></returns>
-        private static int HashCode(string s)
+        private static int HashCode(int n)
         {
-            //return s.Select(a => (int)a).Sum();
-            var ret = 0;
-            foreach( var c in s ?? string.Empty)
-            {
-                ret += (int)c;
-            }
-            return ret;
+            return n.GetHashCode();
         }
     }
 }
