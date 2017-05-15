@@ -87,9 +87,17 @@ This method returns a [datetime](https://docs.microsoft.com/en-us/dotnet/api/sys
 ### Decimal
 This method returns a (C#) [decimal](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/keywords/decimal).  
 There is *not* an overloaded method for creating a decimal in an interval.  
-The result is probably not evenly distributed.
+The result is probably not evenly distributed.  
+There are some worries around `Decimal(decimal minValue, decimal maxValue)` so it is not implemented.
 
 	decimal Decimal();
+
+### Enum
+**TBA**  
+This method returns an enum.
+
+	Enum<MyEnum> Enum<MyEnum>();
+	Enum<MyEnum> EnumExcept<MyEnum>(IEnumerable<MyEnum> exceptedEnums);
 
 ### Guid
 This method returns a [GUID](https://docs.microsoft.com/en-us/dotnet/api/system.guid).  
