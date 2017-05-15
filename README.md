@@ -1,5 +1,7 @@
 # KaosKo
 
+Version 1.0.1
+
 This library is licensed under LGPLv3 license.  
 This means that you are free to use this library in your (commercial) product as long as  you
 1) attach the code for KaosKo
@@ -8,11 +10,11 @@ This means that you are free to use this library in your (commercial) product as
 
 to every customer of your (commercial) product.
 
-## KaosKo library
+## KaosKo class
 
-KaosKo is a library for randomising different types of data.
+KaosKo is a class for randomising different types of data.
 
-## PseudoRandom library
+## PseudoRandom class
 
 PseudoRandom has a slightly different raison d'ètre than KaosKo.
 Namely to *not* generate randomised data but determistic data. This is for instance used for automatic tests where one wants to know the input and hence output.  
@@ -189,8 +191,8 @@ There is a settable property, `StringLength`, for the length of the returned str
 	// ticketReference becomes something like "TKT-UtaTrB".
 
 	var tooShort = pr.String("LongPrefix", 5);
-	// The lib has decided to be safe and returns "LongP".
+	// The lib has decided to play it safe and sets tooShort to "LongP".
 
 	pr.StringCharacters = "012345+-";
 	var numbers = pr.String();
-	// nubmers becomes something like "45-+241+";
+	// numbers becomes something like "45-+241+";
