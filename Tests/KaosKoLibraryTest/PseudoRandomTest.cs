@@ -7,6 +7,16 @@
     [TestClass]
     public class PseudoRandomTest
     {
+        private PseudoRandom pr;
+
+        public TestContext TestContext { get; set; }
+
+        [TestInitialize]
+        public void Setup()
+        {
+            pr = new PseudoRandom(TestContext.TestName);
+        }
+
         #region Constructor tests.
 
         [TestMethod]
@@ -34,9 +44,13 @@
             //  #   Act.
             var knownSeedResult = sutKnownSeed.PositiveInt();
             var methodSeedResult = sutMethodSeed.PositiveInt();
+            var initialisedSeedResult = pr.PositiveInt();
 
             //  #   Assert.
-            Assert.AreEqual(knownSeedResult, methodSeedResult);
+            Assert.AreEqual(knownSeedResult, methodSeedResult, 
+                "The SUTs should all return the same result as all use the same seed.");
+            Assert.AreEqual(knownSeedResult, initialisedSeedResult,
+                "The SUTs should all return the same result as all use the same seed.");
         }
 
         [TestMethod]
