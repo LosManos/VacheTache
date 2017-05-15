@@ -20,14 +20,21 @@ This makes it easy to create the class and have randomised values.
 	KaosKo(long? seed = null);
 	KaosKo(Func<int,int> hashCodeFunc, long seed);
 
+#### Examples
+
+	var kk = new KaosKo();
+	var address = kk.String("ADR-");
+	// address is now somethign like "ADR-kdIChE".
+
 ### PseudoRandom
 The default constructor has a optional string parameter.  
-If not provided [[CallerMemberName]](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute?view=netcore-1.1) is used. This makes it easy to set it up in a test method like so:  
+If not provided [[CallerMemberName]](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute?view=netcore-1.1) is used. 
 
 	 PseudoRandom([CallerMemberName] string seed = null);
 	 PseudoRandom(Func<string, int> hashCodeFunc, string seed);
 
 #### Examples
+The use of [CallerMemberName] makes it easy to set it up in a test method like so:  
 
 	[TestMethod]
 		public void MyTest()
