@@ -4,6 +4,7 @@ namespace KaosKoLibraryTest
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using KaosKoLibrary;
     using System.Linq;
+    using System.Collections.Generic;
 
     [TestClass]
     public class KaosKoTest
@@ -404,6 +405,146 @@ namespace KaosKoLibraryTest
                 results.All(r => r >= 1),
                 "If we are iterating that many times it would be strange if not all longs was returns at least once.");
         }
+
         #endregion
+
+        #region String tests.
+
+        [TestMethod]
+        public void String_BePredictable()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(55);
+
+            //  #   Act.
+            var res = new[] { sut.String(), sut.String(), sut.String() };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { "C6mscMHc", "VHXyAfDz", "7fkLhurp" },
+                res,
+                $"Values were [{string.Join(",",res)}]");
+        }
+
+        [TestMethod]
+        public void String_CustomStringCharacters_ReturnOnlyThem()
+        {
+            //  #   Arrange.
+            const string Characters = "abcDEF";
+            var sut = new KaosKo(2106);
+            sut.StringCharacters = Characters;
+            var results = new Dictionary<string, int>(); ;
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000; i++)
+            {
+                var res = sut.String();
+                Assert.IsTrue(
+                    ExpectedContainsActual(Characters, res),
+                    $"Result [{res}] contains character(s) that aren't in [{Characters}] at loop index {i}."
+                );
+            }
+        }
+
+        [TestMethod]
+        public void String_CustomStringLength_ReturnStringWithSetLength()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2132);
+            sut.StringLength = 6;
+
+            //  #   Act.
+            var res = sut.String();
+
+            //  #   Assert.
+            Assert.AreEqual(6, res.Length);
+        }
+
+        [TestMethod]
+        public void String_Length_ReturnStringWithLength()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2132);
+            const int Length = 7;
+            Assert.AreNotEqual(Length, sut.StringLength, "Sobriety test that we don't set the length to StringLength.");
+
+            //  #   Act.
+            var res = sut.String(Length);
+
+            //  #   Assert.
+            Assert.AreEqual(Length, res.Length);
+        }
+
+        [TestMethod]
+        public void String_NullPrefix_ReturnNonPrefixedString()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2142);
+
+            //  #   Act.
+            var res = sut.String(null);
+
+            //  #   Assert.
+            Assert.AreEqual("UtaTrBNd", res);
+        }
+
+        [TestMethod]
+        public void String_Prefix_ReturnPrefixedString()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2142);
+
+            //  #   Act.
+            var res = sut.String("321");
+
+            //  #   Assert.
+            Assert.AreEqual("321UtaTr", res);
+        }
+
+        [TestMethod]
+        public void String_NullPrefixAndLength_ReturnNonPrefixedStringOfLength()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2142);
+
+            //  #   Act.
+            var res = sut.String(null, 3);
+
+            //  #   Assert.
+            Assert.AreEqual("Uta", res);
+        }
+
+        [TestMethod]
+        public void String_PrefixAndLength_ReturnPrefixedString()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2142);
+
+            //  #   Act.
+            var res = sut.String("321", 5);
+
+            //  #   Assert.
+            Assert.AreEqual("321Ut", res);
+        }
+
+        [TestMethod]
+        public void String_PrefixAndShorterLength_ReturnTruncatedPrefix()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2142);
+
+            //  #   Act.
+            var res = sut.String("abcdef", 3);
+
+            //  #   Assert.
+            Assert.AreEqual("abc", res);
+        }
+
+        #endregion
+
+        private bool ExpectedContainsActual(string expected, string actual)
+        {
+            return actual.All(ec => expected.Contains(ec));
+        }
     }
 }

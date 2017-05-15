@@ -7,6 +7,10 @@
     {
         protected Random _rand;
 
+        public string StringCharacters { get; set; } = "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        public int StringLength { get; set; } = 8;
+
         /// <summary>This constructor behaves like he default constructor
         /// and is used for seeding the random values with a known seed.
         /// </summary>
@@ -226,6 +230,59 @@
             return PositiveLong(range) + minValue - 1;
         }
 
+        /// <summary>This method returns a randomised string.
+        /// The returned characters are in settable property <see cref="StringCharacters"/>.
+        /// The length of the returned string is in settable property <see cref="StringLength"/>
+        /// </summary>
+        /// <returns></returns>
+        public string String()
+        {
+            return String(StringLength);
+        }
+
+        /// <summary>This method returns a randomised stirng
+        /// with the length set in the parameter.
+        /// The returned characters are in settable property <see cref="StringCharacters"/>.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public string String(int length)
+        {
+            var res = new char[length];
+            var chars = StringCharacters.ToCharArray();
+            var charsLength = chars.Length;
+            for (int i = 0; i < length; i++)
+            {
+                res[i] = chars[Int(0, charsLength - 1)];
+            }
+            return new string(res);
+        }
+
+        /// <summary>This method returns a prefixed randomised string.
+        /// The returned characters are in settable property <see cref="StringCharacters"/>.
+        /// The length of the returned string is in settable property <see cref="StringLength"/>
+        /// The prefix is included in the string length.
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        public string String( string prefix)
+        {
+            return String(prefix, StringLength);
+        }
+
+        /// <summary>This method returns a prefixed randomised string
+        /// with the length set in the parameter.
+        /// The returned characters are in settable property <see cref="StringCharacters"/>.
+        /// The prefix is included in the string length.
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public string String(string prefix, int length)
+        {
+            prefix = prefix ?? string.Empty;
+            return (prefix + String(length)).Substring(0, length);
+        }
         /// <summary>This is a (simple) hash algorithm.
         /// We don't use the built in GetHashCode since it might
         /// change value between every run.
