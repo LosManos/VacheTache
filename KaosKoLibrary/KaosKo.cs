@@ -1,6 +1,7 @@
 ﻿namespace KaosKoLibrary
 {
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     public class KaosKo
@@ -121,6 +122,29 @@
         //{
         //    return Math.Abs(Decimal()) % (maxValue - minValue) + minValue;
         //}
+
+        /// <summary>This method returns a pseudo randomised Enum by choice.
+        /// <para>
+        /// Note: it does not handle inconsecutive series.
+        /// That can be remedied by getting all values to a list and then randomising from these values, but it is presently not implemented so.
+        /// </para>
+        /// <para>
+        /// Note it does not handle enums with the same item value.
+        /// http://stackoverflow.com/questions/8043027/non-unique-enum-values
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        public TEnum Enum<TEnum>() where TEnum : struct
+        {
+            var minValue = System.Enum.GetValues(typeof(TEnum)).Cast<int>().Min();
+            var maxValue = System.Enum.GetValues(typeof(TEnum)).Cast<int>().Max();
+
+            int val = _rand.Next(minValue, maxValue + 1);
+
+            // Whoa! This is what I found necessary for convering an int to a generic enum!
+            return (TEnum)System.Enum.Parse(typeof(TEnum), val.ToString());
+        }
 
         /// <summary>This method creates a new GUIDish value.
         /// It is not a proper GUID as a such adheres to certain rules, for instance there are presently 4 different GUID versions and the generating of randomised values below does not take this into consideration.

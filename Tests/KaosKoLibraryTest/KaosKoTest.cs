@@ -201,6 +201,58 @@ namespace KaosKoLibraryTest
 
         #endregion
 
+        #region Enum tests.
+
+        private enum MyEnum
+        {
+            I, 
+            prefer, 
+            a, 
+            painful, 
+            truth, 
+            over, 
+            any, 
+            blissful, 
+            fantasy
+        }
+
+        [TestMethod]
+        public void Enum_ReturnPredictableResult()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2315);
+
+            //  #   Act.
+            var res = new[] { sut.Enum<MyEnum>(), sut.Enum<MyEnum>(), sut.Enum<MyEnum>() };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { MyEnum.prefer, MyEnum.I, MyEnum.fantasy },
+                res,
+                $"The result [{string.Join(",", res)}] did not match.");
+        }
+
+        [TestMethod]
+        public void Enum_ReturnWithinInterval()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2327);
+            var results = new Dictionary<MyEnum, int>();
+
+            //  #   Act.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Enum<MyEnum>();
+                Increase(results, res);
+            }
+
+            Assert.IsTrue(
+                results.All(r => r.Value >= 1),
+                "With that many iterations every enum item should have been returned at least once.");
+        }
+
+        #endregion
+
         #region Guid tests.
 
         [TestMethod]
@@ -546,5 +598,12 @@ namespace KaosKoLibraryTest
         {
             return actual.All(ec => expected.Contains(ec));
         }
+
+        private void Increase(Dictionary<MyEnum, int> dictionary, MyEnum key)
+        {
+            var value = dictionary.ContainsKey(key) ? dictionary[key] : 0;
+            dictionary[key] = value + 1;
+        }
+
     }
 }

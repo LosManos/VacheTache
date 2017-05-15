@@ -1,5 +1,13 @@
 # KaosKo
 
+This library is licensed under LGPLv3 license.  
+This means that you are free to use this library in your (commercial) product as long as  you
+1) attach the code for KaosKo
+1) and any updates you have made to KaosKo
+1) and the license for KaosKo  
+
+to every customer of your (commercial) product.
+
 ## KaosKo library
 
 KaosKo is a library for randomising different types of data.
@@ -99,11 +107,23 @@ There are some worries around `Decimal(decimal minValue, decimal maxValue)` so i
 
 	decimal Decimal();
 
+### Currency
+**TBA**
+
+This method(s) will return a natural number and a 2 decimal fraction. For use with Yen one should be able to remove the decimals.
+
+	decimal Currency();
+	decimal Currency(int decimals = 2);
+	decimal Currency(bool hasDecimals = true);
+	decimal Currency(Even even = five);
+
 ### Enum
-**TBA**  
 This method returns an enum.
 
 	Enum<MyEnum> Enum<MyEnum>();
+
+**TBA**  
+
 	Enum<MyEnum> EnumExcept<MyEnum>(IEnumerable<MyEnum> exceptedEnums);
 
 ### Guid
@@ -119,6 +139,12 @@ There is an overloaded method creating an integer in an interval.
 
 	int Int();
 	int Int(int minValue, int maxValue);
+
+### Letter
+**TBA**  
+
+### Letters
+**TBA**
 
 ### PositiveInt
 This method returns a 32 bit positive [integer](https://docs.microsoft.com/en-us/dotnet/api/system.int32).  
