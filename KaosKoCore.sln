@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaosKoLibraryTest", "Tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC0D3B24-BE32-4B89-8839-6AEC465CEDB3}"
 	ProjectSection(SolutionItems) = preProject
+		License.txt = License.txt
 		README.md = README.md
 	EndProjectSection
 EndProject

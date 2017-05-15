@@ -1,7 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Version>0.9.0</Version>
+    <Description>KaosKo is a library for randomising different types of data.</Description>
+    <Authors>LosManos</Authors>
+    <Company />
+    <Copyright>LGPLv3</Copyright>
+    <PackageLicenseUrl>https://www.gnu.org/licenses/lgpl-3.0.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/LosManos/KaosKo</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LosManos/KaosKo</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
 </Project>
