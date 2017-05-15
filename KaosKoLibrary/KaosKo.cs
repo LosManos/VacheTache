@@ -140,7 +140,6 @@
         {
             return _rand.Next(int.MinValue, int.MaxValue);
         }
-
         /// <summary>This method returns a randomised integer below maxValue and above or same as minValue.
         /// Note lower-than-max and not lower-or-equal-to-max.
         /// The reason for this is that the called Random.Next method behaves this way
@@ -174,7 +173,57 @@
         /// <returns></returns>
         public int PositiveInt(int maxValue)
         {
-            return _rand.Next(maxValue-1)+1;
+            return _rand.Next(maxValue - 1) + 1;
+        }
+
+        /// <summary>This method returns a randomised Long greater than or equal to 0.
+        /// Warning: The method is not thoroughly tested for not being zero.
+        /// <para>
+        /// The code is copied with pride from http://stackoverflow.com/a/2000459/521554
+        /// </para>
+        /// </summary>
+        /// <returns></returns>
+        public long PositiveLong()
+        {
+            return PositiveLong(long.MaxValue);
+        }
+
+        /// <summary>This method return a randomised Long greater than 0 and less than max value.
+        /// <para>
+        /// The code is copied with pride from http://stackoverflow.com/a/2000459/521554
+        /// </para>
+        /// </summary>
+        /// <param name="maxValue"></param>
+        /// <returns></returns>
+        public long PositiveLong(long maxValue)
+        {
+            var max = maxValue - 1;
+            return (long)((NextPositiveLong() / (double)long.MaxValue) * max)+1;
+        }
+
+        /// <summary>This method returns a long between the values.
+        /// <para>
+        /// The code is copied with pride from http://stackoverflow.com/a/2000459/521554
+        /// </para>
+        /// </summary>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
+        /// <returns></returns>
+        public long PositiveLong(long minValue, long maxValue)
+        {
+            if( minValue <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(minValue),
+                    $"MinValue must be 1 or greater. It was [{minValue}]");
+            }
+            if (minValue >= maxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(minValue), 
+                    $"MinValue [{minValue}] must be less than MaxValue [{maxValue}]");
+            }
+            //var max = maxValue - 1;
+            long range = maxValue - minValue + 1;
+            return PositiveLong(range) + minValue - 1;
         }
 
         /// <summary>This is a (simple) hash algorithm.
@@ -188,6 +237,20 @@
         private static int HashCode(int n)
         {
             return n.GetHashCode();
+        }
+
+        /// <summary>This helper method returns a randomised long.
+        /// The code is copied with pride from http://stackoverflow.com/a/2000459/521554
+        /// </summary>
+        /// <returns></returns>
+        private long NextPositiveLong()
+        {
+
+            byte[] bytes = new byte[sizeof(long)];
+            _rand.NextBytes(bytes);
+            // strip out the sign bit
+            bytes[7] = (byte)(bytes[7] & 0x7f);
+            return BitConverter.ToInt64(bytes, 0);
         }
     }
 }

@@ -266,7 +266,7 @@ namespace KaosKoLibraryTest
         #region PositiveInt tests.
 
         [TestMethod]
-        public void PoistiveInt_ReturnPredictableResult()
+        public void PositiveInt_ReturnPredictableResult()
         {
             //  #   Arrange.
             var sut = new KaosKo(42);
@@ -300,7 +300,7 @@ namespace KaosKoLibraryTest
         {
             //  #   Arrange.
             var sut = new KaosKo(42);
-            const int Max = 420;
+            const int Max = 43;
             var results = new int[Max-1];
 
             //  #   Act and Assert.
@@ -318,6 +318,92 @@ namespace KaosKoLibraryTest
                 "If we are iterating that many times it would be strange if not all integers was returns at least once.");
         }
 
+        #endregion
+
+        #region PositiveLong tests.
+
+        [TestMethod]
+        public void PositiveLong_ReturnPredictableResult()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(42);
+
+            //  #   Act.
+            var res = new[] { sut.PositiveLong(), sut.PositiveLong(), sut.PositiveLong() };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { 4309105566363031553, 4233293422508541441, 5502579974182123521 },
+                res,
+                $"Values were [{res[0]},{res[1]},{res[2]}].");
+        }
+
+        [TestMethod]
+        public void PositiveLong_ReturnPositive()
+        {
+            // A long is so big so a miljon runs won't show anything
+            // but at least we have called it to secure the interface.
+
+            //  #   Arrange.
+            var sut = new KaosKo(42);
+
+            //  #   Act and assert.
+            for (int i = 0; i <= 1_000_000; i++)
+            {
+                var res = sut.PositiveLong();
+                Assert.IsTrue(1 <= res && res <= long.MaxValue, 
+                    $"The value {res} was not greater than 0 and <= {long.MaxValue} at index {i}.");
+            }
+        }
+
+        [TestMethod]
+        public void PositiveLong_Max_ReturnBelow()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(42);
+            const long Max = 45;
+            var results = new long[Max - 1];
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.PositiveLong(Max);
+                Assert.IsTrue(1 <= res && res < Max,
+                    $"The value {res} was not greater than 0 and <= {Max} at index {i}.");
+
+                //  Keep a tab on how many times each long value was returned.
+                results[res - 1] += 1;
+            }
+
+            Assert.IsTrue(
+                results.All(r => r >= 1),
+                "If we are iterating that many times it would be strange if not all longs was returns at least once.");
+        }
+
+        [TestMethod]
+        public void PositiveLong_MinAndMax_ReturnBelow()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(42);
+            const long Min = 21;
+            const long Max = 45;
+            var results = new long[Max - Min];
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.PositiveLong(Min, Max);
+                Assert.IsTrue(Min <= res && res < Max,
+                    $"The value {res} was not greater than {Min} and < {Max} at index {i}.");
+
+                //  Keep a tab on how many times each long value was returned.
+                results[res - Min] += 1;
+            }
+
+            Assert.IsTrue(
+                results.All(r => r >= 1),
+                "If we are iterating that many times it would be strange if not all longs was returns at least once.");
+        }
         #endregion
     }
 }

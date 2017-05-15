@@ -84,5 +84,11 @@ This method returns a [32 bit signed integer](https://docs.microsoft.com/en-us/d
 There is an overloaded method creating an integer in an interval.
 
 ### PositiveInt
-This method returns a 32 bit positive [integer](https://docs.microsoft.com/en-us/dotnet/api/system.int32). 0 is *not* considered a positive number.  
-There are overlaoded methods creating a postivite integer in an interval.
+This method returns a 32 bit positive [integer](https://docs.microsoft.com/en-us/dotnet/api/system.int32).  
+0 is *not* considered a positive number.  
+There are overloaded methods creating a positive integer in an interval.
+
+### PositiveLong
+This method returns a 64 bit positive [long](https://docs.microsoft.com/en-us/dotnet/api/system.int64).  
+0 is *not* considred a positive number.  
+There are overloaded methods creating a positive long in an interval.
