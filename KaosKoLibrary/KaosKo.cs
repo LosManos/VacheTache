@@ -1,6 +1,7 @@
 ﻿namespace KaosKoLibrary
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -180,6 +181,13 @@
         public int Int(int minValue, int maxValue)
         {
             return _rand.Next(minValue, maxValue);
+        }
+
+        public T OneOf<T>(IEnumerable<T> lst)
+        {
+            var index = Int(0, lst.Count() - 1);
+
+            return lst.Skip(index).First();
         }
 
         /// <summary>This method returns a randomised integer between 0 and int.MaxValue.

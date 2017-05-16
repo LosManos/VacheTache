@@ -271,6 +271,63 @@ namespace KaosKoLibraryTest
 
         #endregion
 
+        #region OneOf tests.
+
+        [TestMethod]
+        public void OneOf_ListOfOne_ReturnTheItem()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(1820);
+            var lst = new[] { "E" };
+
+            //  #   Act and Assert.
+            for (int i = 0; i < 1_000; i++)
+            {
+                var res = sut.OneOf(lst);
+                Assert.AreEqual("E", res);
+            }
+        }
+
+        [TestMethod]
+        public void OneOf_ReturnAllInList()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(1820);
+            var lst = new[] { "A", "B", "C", "D", "E" };
+            var results = new Dictionary<string, int>();
+
+            //  #   Act.
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.OneOf(lst);
+                Increase(results, res);
+            }
+
+            //  #   Assert.
+            Assert.IsTrue(
+                results.All(r => r.Value >= 1),
+                "If we are iterating that many times it would be strange if not all items were returned at least once.");
+        }
+
+        [TestMethod]
+        public void OneOf_ReturnPredictableResult()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(1820);
+            var lst = new[] { "A", "B", "C", "D", "E" };
+
+            //  #   Act.
+            var res = new[] { sut.OneOf(lst), sut.OneOf(lst), sut.OneOf(lst) };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { "C", "D", "D" },
+                res,
+                $"The result [{string.Join(",", res)}] did not match.");
+        }
+
+        #endregion
+
         #region Int tests.
 
         [TestMethod]
@@ -311,7 +368,7 @@ namespace KaosKoLibraryTest
 
             Assert.IsTrue(
                 results.All(r => r >= 1),
-                "If we are iterating that many times it would be strange if not all integers was returned at least once.");
+                "If we are iterating that many times it would be strange if not all integers were returned at least once.");
         }
 
         #endregion
@@ -599,11 +656,10 @@ namespace KaosKoLibraryTest
             return actual.All(ec => expected.Contains(ec));
         }
 
-        private void Increase(Dictionary<MyEnum, int> dictionary, MyEnum key)
+        private void Increase<TKey>(Dictionary<TKey,int> dictionary, TKey key)
         {
             var value = dictionary.ContainsKey(key) ? dictionary[key] : 0;
             dictionary[key] = value + 1;
         }
-
     }
 }

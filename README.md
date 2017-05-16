@@ -1,6 +1,6 @@
 # KaosKo
 
-Version 1.0.1
+Version 1.1.0
 
 This library is licensed under LGPLv3 license.  
 This means that you are free to use this library in your (commercial) product as long as  you
@@ -8,7 +8,8 @@ This means that you are free to use this library in your (commercial) product as
 1) and any updates you have made to KaosKo
 1) and the license for KaosKo  
 
-to every customer of your (commercial) product.
+to every customer of your (commercial) product.  
+Your existing (commercial) product is not affected.
 
 ## KaosKo class
 
@@ -147,6 +148,20 @@ There is an overloaded method creating an integer in an interval.
 
 ### Letters
 **TBA**
+
+### OneOf
+This method returns an item of the list of items provided.
+
+	T OneOf<T>(IEnumerable<T> lst)
+
+#### Examples
+
+	var pr = new KaosKo();
+	var freedomBraves = pr.OneOf(new[]{"Assange", "Manning", "Hood", "Ghandi", "Mandela"});
+	// freedomBraves becomes something like "Manning".
+
+	var nr = pr.OneOf(new[]{3,14,15,9});
+	// nr becomes something like 14.
 
 ### PositiveInt
 This method returns a 32 bit positive [integer](https://docs.microsoft.com/en-us/dotnet/api/system.int32).  
