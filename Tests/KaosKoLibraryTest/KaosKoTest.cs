@@ -5,6 +5,7 @@ namespace KaosKoLibraryTest
     using KaosKoLibrary;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Globalization;
 
     [TestClass]
     public class KaosKoTest
@@ -94,6 +95,97 @@ namespace KaosKoLibraryTest
 
             Assert.IsTrue(results.All(r => r >= 1), 
                 "If we are iterating that many times it would be strange if not both true and false was returned at least once.");
+        }
+
+        #endregion
+
+        #region Currency tests.
+
+        [TestMethod]
+        public void Currency_ReturnTypeEveryOneHundredthFraction()
+        {
+            decimal value = 0;
+            var sut = new KaosKo(2204);
+            Assert.AreEqual(
+                value.GetType(),
+                sut.Currency().GetType(), 
+                $"Sobriety test that we are checking against the type that {nameof(sut.Currency)} returns.");
+
+            for (int euro = 0; euro < 100; euro++)
+            {
+                for (int cent = 0; cent < 100; cent++)
+                {
+                    value = euro + (decimal)cent / 100;
+                    var valueString = $"{euro}." + cent.ToString("D2");
+                    Assert.AreEqual(
+                        valueString, 
+                        value.ToString("0.00", CultureInfo.InvariantCulture),
+                        $"We should be able to represent every 'cent' with the return type of {nameof(sut.Currency)}");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void Currency_ReturnPredictableResult()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2209);
+
+            //  #   Act.
+            var res = new[] { sut.Currency(), sut.Currency(), sut.Currency() };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { 1640167078.82m, 115094073.98m, 1424365856.26m },
+                res,
+                $"Values were [{string.Join(",", res)}]");
+        }
+
+        [TestMethod]
+        public void Currency_MinMax_ReturnPredictableResult()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2209);
+            const int Min = -13;
+            const int Max = 33;
+
+            //  #   Act.
+            var res = new[] { sut.Currency(Min, Max), sut.Currency(Min, Max), sut.Currency(Min, Max) };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { 22.96m, 25.05m, 11.98m },
+                res,
+                $"Values were [{string.Join(", ", res)}]");
+        }
+
+        [TestMethod]
+        public void Currency_MinMax_ReturnBetween()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2222);
+            const int Min = -12;
+            const int Max = 25;
+            var euroResults = new Dictionary<int, int>();
+            var centResults = new Dictionary<int, int>();
+            //var results = new Dictionary<decimal, int>();
+
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.Currency(Min, Max);
+                Assert.IsTrue(Min <= res && res < Max,
+                    $"Returned value was {res} which is not greater or equal to {Min} and less than {Max} at index {i}.");
+
+                Increase(euroResults, (int)decimal.Truncate(res));
+                Increase(centResults, DecimalPart(res, 2));
+            }
+
+            Assert.AreEqual(Max - Min, euroResults.Count);
+            Assert.IsTrue(
+                euroResults.All(r => r.Value >= 1));
+            Assert.AreEqual(100, centResults.Count);
+            Assert.IsTrue(
+                centResults.All(r => r.Value >= 1));
         }
 
         #endregion
@@ -330,6 +422,45 @@ namespace KaosKoLibraryTest
 
         #region Int tests.
 
+        [DataTestMethod]
+        [DataRow("7", 0)]
+        [DataRow("7.3", 1)]
+        [DataRow("7.42", 2)]
+        [DataRow("7.427", 3)]
+        public void Currency_CustomNumberOfDecimals_ReturnAccordingManyDecimals(string expectedResult, int numberOfDecimals)
+        {
+            //  #   Arrange.
+            var expectedResultDecimal = decimal.Parse(expectedResult, CultureInfo.InvariantCulture);
+            var sut = new KaosKo(2156);
+
+            //  #   Act.
+            var res = sut.Currency(0, 100, numberOfDecimals);
+
+            //  #   Assert.
+            Assert.AreEqual(expectedResultDecimal, res,
+                $"When randomising a Currency with {numberOfDecimals} we expect {expectedResult}.");
+        }
+
+        [DataTestMethod]
+        [DataRow("7", 0)]
+        [DataRow("7.3", 1)]
+        [DataRow("7.42", 2)]
+        [DataRow("7.427", 3)]
+        public void Currency_CustomNumberOfDecimalsProperty_ReturnAccordingManyDecimals(string expectedResult, int numberOfDecimals)
+        {
+            //  #   Arrange.
+            var expectedResultDecimal = decimal.Parse(expectedResult, CultureInfo.InvariantCulture);
+            var sut = new KaosKo(2156);
+
+            //  #   Act.
+            sut.NumberOfCurrencyDecimals = numberOfDecimals;
+            var res = sut.Currency(0, 100);
+
+            //  #   Assert.
+            Assert.AreEqual(expectedResultDecimal, res,
+                $"When randomising a Currency with {numberOfDecimals} we expect {expectedResult}.");
+        }
+
         [TestMethod]
         public void Int_NoParameter_ReturnSameOrAboveIntMinAndBelowIntMax()
         {
@@ -366,6 +497,10 @@ namespace KaosKoLibraryTest
                 results[res-Min] += 1;
             }
 
+            Assert.AreEqual(
+                Max - Min,
+                results.Count(),
+                "We should have gotten one of each integer.");
             Assert.IsTrue(
                 results.All(r => r >= 1),
                 "If we are iterating that many times it would be strange if not all integers were returned at least once.");
@@ -651,12 +786,77 @@ namespace KaosKoLibraryTest
 
         #endregion
 
-        private bool ExpectedContainsActual(string expected, string actual)
+        #region DecimalPart tests.
+
+        [DataTestMethod]
+        [DataRow(0, "0.0", 0)]
+        [DataRow(0, "0.0", 1)]
+        [DataRow(0, "0.0", 2)]
+        [DataRow(0, "0.0", 3)]
+        [DataRow(0, "1.0", 1)]
+        [DataRow(0, "1.0", 2)]
+        [DataRow(0, "2.01", 0)]
+        [DataRow(0, "2.01", 1)]
+        [DataRow(1, "2.01", 2)]
+        [DataRow(0, "2.1", 0)]
+        [DataRow(0, "2.1", 0)]
+        [DataRow(1, "2.1", 1)]
+        [DataRow(10, "2.1", 2)]
+        [DataRow(1, "2.10", 1)]
+        [DataRow(10, "2.10", 2)]
+        [DataRow(1, "2.13", 1)]
+        [DataRow(13, "2.13", 2)]
+        [DataRow(130, "2.13", 3)]
+        [DataRow(0, "99.9", 0)]
+        [DataRow(9, "99.9", 1)]
+        [DataRow(90, "99.9", 2)]
+        [DataRow(0, "99.999", 0)]
+        [DataRow(9, "99.999", 1)]
+        [DataRow(99, "99.999", 2)]
+        [DataRow(999, "99.999", 3)]
+        [DataRow(0, "99.099", 0)]
+        [DataRow(0, "99.099", 1)]
+        [DataRow(9, "99.099", 2)]
+        public void DecimalPart_Value_ReturnDecimalPart(int expectedDecimalPart, string source, int numberOfDecimals)
+        {
+            //  #   Arrange.
+            var decimalSource = decimal.Parse(source, CultureInfo.InvariantCulture);
+
+            //  #   Act.
+            var res = DecimalPart(decimalSource, numberOfDecimals);
+            
+            //  #   Assert.
+            Assert.AreEqual(expectedDecimalPart, res,
+                $"The decimal {source} is expected to have decimals {expectedDecimalPart} with {numberOfDecimals} decimals");
+        }
+
+        #endregion
+
+        private static bool ExpectedContainsActual(string expected, string actual)
         {
             return actual.All(ec => expected.Contains(ec));
         }
 
-        private void Increase<TKey>(Dictionary<TKey,int> dictionary, TKey key)
+        private static int DecimalPart(decimal source, int numberOfDecimals)
+        {
+            if( numberOfDecimals == 0)
+            {
+                return 0;
+            }
+
+            var s = source.ToString(CultureInfo.InvariantCulture);
+            if(s.Contains(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator) == false)
+            {
+                s += ".0";
+            }
+            var decimalPart = s.Substring(s.IndexOf(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator)+1);
+
+            decimalPart = decimalPart.PadRight(numberOfDecimals, '0').Substring(0, numberOfDecimals);
+
+            return int.Parse(decimalPart, CultureInfo.InvariantCulture);
+        }
+
+        private static void Increase<TKey>(Dictionary<TKey,int> dictionary, TKey key)
         {
             var value = dictionary.ContainsKey(key) ? dictionary[key] : 0;
             dictionary[key] = value + 1;

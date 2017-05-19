@@ -13,6 +13,8 @@
 
         public int StringLength { get; set; } = 8;
 
+        public int NumberOfCurrencyDecimals = 2;
+
         /// <summary>This constructor behaves like he default constructor
         /// and is used for seeding the random values with a known seed.
         /// </summary>
@@ -41,6 +43,53 @@
         public bool Bool()
         {
             return Convert.ToBoolean(_rand.Next(0, 2));
+        }
+
+        /// <summary>This method returns a positive randomised currency
+        /// Higher or equal to <see cref="Int.Min"/> and less than <see cref="Int.Max"/>.
+        /// A currency is a value like Euro and Cents, 12.34 for instance.
+        /// </summary>
+        /// <returns></returns>
+        public decimal Currency()
+        {
+            return Currency(int.MinValue, int.MaxValue);
+        }
+
+        /// <summary>This method returns a randomised currency.
+        /// A currency is a value like Euro and Cents, 12.34 for instance.
+        /// Min is the lowest returned value and can be returned.
+        /// Max is above returned value and cannot be returned.
+        /// The number of decimals (cent) in the result is specified in <see cref="NumberOfCurrencyDecimals"/> which has default value 2.
+        /// </summary>
+        /// <param name="min">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
+        /// <param name="max">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
+        /// <returns></returns>
+        public decimal Currency(int min, int max)
+        {
+            return Currency(min, max, NumberOfCurrencyDecimals);
+        }
+
+        /// <summary>This method returns a randomised currency.
+        /// A currency is a value like Euro and Cents, 12.34 for instance.
+        /// Min is the lowest returned value and can be returned.
+        /// Max is above returned value and cannot be returned.
+        /// </summary>
+        /// <param name="min">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
+        /// <param name="max">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
+        /// <param name="numberOfDecimals">The number of decimals (cent) in use. Normally 2 but for yen it is 0.</param>
+        /// <returns></returns>
+        public decimal Currency(int min, int max, int numberOfDecimals)
+        {
+            var euro = Int(min, max);
+            decimal centDecimal = 0;
+
+            if(numberOfDecimals >= 1)
+            {
+                var maxCent = Math.Max(0, (int)Math.Pow(10, numberOfDecimals) - 1);
+                decimal cent = Int(0, maxCent);
+                centDecimal = cent / (decimal)Math.Pow(10, numberOfDecimals);
+            }
+            return euro + (decimal)centDecimal;
         }
 
         /// <summary>This method returns a random Date.

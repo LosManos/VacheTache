@@ -1,6 +1,6 @@
 # KaosKo
 
-Version 1.1.0
+Version 1.2.0
 
 This library is licensed under LGPLv3 license.  
 This means that you are free to use this library in your (commercial) product as long as  you
@@ -111,14 +111,18 @@ There are some worries around `Decimal(decimal minValue, decimal maxValue)` so i
 	decimal Decimal();
 
 ### Currency
-**TBA**
-
-This method(s) will return a natural number and a 2 decimal fraction. For use with Yen one should be able to remove the decimals.
+This method(s) will return a natural number or a natural number and 2 decimal fraction. The former is for use with currencies without decimals, i.e. yen. 
+To set the number of decimals one either does that in the call or in the property `NumberOfCurrencyDecimals`.
 
 	decimal Currency();
-	decimal Currency(int decimals = 2);
-	decimal Currency(bool hasDecimals = true);
-	decimal Currency(Even even = five);
+	decimal Currency(int min, int max);
+	decimal Currency(int min, int max, int decimals);
+
+#### TBA
+
+Properties `CurrencyMin` and `CurrencyMax` for setting the min and max in a central, convenient place.
+
+Generate currencies in even 5 or 10 intervals.
 
 ### Enum
 This method returns an enum.
@@ -145,9 +149,11 @@ There is an overloaded method creating an integer in an interval.
 
 ### Letter
 **TBA**  
+Will work like `String(1)` but only letters (A-Za-Z). It will, just like `String` have a settable property with characters to choose from.
 
 ### Letters
 **TBA**
+Will work like `String(n)` but withe letters like `Letter`.
 
 ### OneOf
 This method returns an item of the list of items provided.
