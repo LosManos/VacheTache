@@ -175,7 +175,7 @@
 
         /// <summary>This method returns a pseudo randomised Enum by choice.
         /// <para>
-        /// Note: it does not handle inconsecutive series.
+        /// Note: it does not handle inconsecutive series or items with the same value properly.
         /// That can be remedied by getting all values to a list and then randomising from these values, but it is presently not implemented so.
         /// </para>
         /// <para>
@@ -194,6 +194,28 @@
 
             // Whoa! This is what I found necessary for convering an int to a generic enum!
             return (TEnum)System.Enum.Parse(typeof(TEnum), val.ToString());
+        }
+
+        /// <summary>This method returns a pseudo randomised Enum by choice except the item provided in the parameter.
+        /// <para>
+        /// Note: it does not handle inconsecutive series or items with the same value properly.
+        /// That can be remedied by getting all values to a list and then randomising from these values, but it is presently not implemented so.
+        /// </para>
+        /// <para>
+        /// Note it does not handle enums with the same item value.
+        /// http://stackoverflow.com/questions/8043027/non-unique-enum-values
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="exceptItem"></param>
+        /// <returns></returns>
+        public TEnum EnumExcept<TEnum>(TEnum exceptItem) where TEnum : struct
+        {
+            var values = System.Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToList();
+            var exceptName = System.Enum.GetName(typeof(TEnum), exceptItem);
+            values.Remove(exceptItem);
+            int index = _rand.Next(values.Count());
+            return values[index];
         }
 
         /// <summary>This method creates a new GUIDish value.

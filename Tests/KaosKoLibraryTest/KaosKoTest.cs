@@ -338,9 +338,47 @@ namespace KaosKoLibraryTest
                 Increase(results, res);
             }
 
+            Assert.AreEqual(Enum.GetNames(typeof(MyEnum)).Count(), results.Count());
             Assert.IsTrue(
-                results.All(r => r.Value >= 1),
-                "With that many iterations every enum item should have been returned at least once.");
+                results.All(r => r.Value >= 1000),
+                "With that many iterations every enum item should have been returned may times.");
+        }
+
+        [TestMethod]
+        public void EnumExcept_Enum_ReturnExceptParameter()
+        {
+            // #   Arrange.
+            var sut = new KaosKo(2205);
+            var results = new Dictionary<MyEnum, int>();
+
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var res = sut.EnumExcept<MyEnum>(MyEnum.blissful);
+                Increase(results, res);
+            }
+
+            Assert.IsFalse(results.Keys.Contains(MyEnum.blissful));
+            Assert.AreEqual(Enum.GetNames(typeof(MyEnum)).Count()-1, results.Count(),
+                "All but one of the enums should have been returned.");
+            Assert.IsTrue(
+                results.All(r => r.Value >= 1000),
+                "With that many iterations every enum item should have been returned many times.");
+        }
+
+        [TestMethod]
+        public void EnumExcept_ReturnPredictableResult()
+        {
+            //  #   Arrange.
+            var sut = new KaosKo(2206);
+
+            //  #   Act.
+            var res = new[] { sut.EnumExcept(MyEnum.a), sut.EnumExcept(MyEnum.painful), sut.EnumExcept(MyEnum.truth) };
+
+            //  #   Assert.
+            CollectionAssert.AreEqual(
+                new[] { MyEnum.prefer, MyEnum.I, MyEnum.any },
+                res,
+                $"The result [{string.Join(",", res)}] did not match.");
         }
 
         #endregion
@@ -832,6 +870,8 @@ namespace KaosKoLibraryTest
 
         #endregion
 
+        #region Helper methods.
+
         private static bool ExpectedContainsActual(string expected, string actual)
         {
             return actual.All(ec => expected.Contains(ec));
@@ -861,5 +901,7 @@ namespace KaosKoLibraryTest
             var value = dictionary.ContainsKey(key) ? dictionary[key] : 0;
             dictionary[key] = value + 1;
         }
+
+        #endregion
     }
 }

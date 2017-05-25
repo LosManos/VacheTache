@@ -1,6 +1,6 @@
 # KaosKo
 
-Version 1.2.0
+Version 1.3.0
 
 This library is licensed under LGPLv3 license.  
 This means that you are free to use this library in your (commercial) product as long as  you
@@ -111,14 +111,14 @@ There are some worries around `Decimal(decimal minValue, decimal maxValue)` so i
 	decimal Decimal();
 
 ### Currency
-This method(s) will return a natural number or a natural number and 2 decimal fraction. The former is for use with currencies without decimals, i.e. yen. 
+This method(s) returns a natural number or a natural number and 2 decimal fraction. The former is for use with currencies without decimals, i.e. yen. 
 To set the number of decimals one either does that in the call or in the property `NumberOfCurrencyDecimals`.
 
 	decimal Currency();
 	decimal Currency(int min, int max);
 	decimal Currency(int min, int max, int decimals);
 
-#### TBA
+**TBA**
 
 Properties `CurrencyMin` and `CurrencyMax` for setting the min and max in a central, convenient place.
 
@@ -127,11 +127,14 @@ Generate currencies in even 5 or 10 intervals.
 ### Enum
 This method returns an enum.
 
-	Enum<MyEnum> Enum<MyEnum>();
+	TEnum> Enum<TEnum>();
 
-**TBA**  
+Note that it, presently, does not handel inconsecutive value series or items with the same value.
 
-	Enum<MyEnum> EnumExcept<MyEnum>(IEnumerable<MyEnum> exceptedEnums);
+### EnumExcept
+This method returns an enum except the one provided in the parameter.
+
+	TEnum EnumExcept<TEnum>(IEnumerable<TEnum> exceptEnums)where TEnum : struct
 
 ### Guid
 This method returns a [GUID](https://docs.microsoft.com/en-us/dotnet/api/system.guid).  
