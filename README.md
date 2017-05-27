@@ -33,9 +33,9 @@ This makes it easy to create the class and have randomised values.
 
 #### Examples
 
-	var kk = new VacheTache();
-	var address = kk.String("ADR-");
-	// address is now somethign like "ADR-kdIChE".
+	var vt = new VacheTache();
+	var address = vt.String("ADR-");
+	// address is now something like "ADR-xdIC".
 
 ### PseudoRandom
 The default constructor has a optional string parameter.  
@@ -185,7 +185,7 @@ There are overloaded methods creating a positive long in an interval.
 This method returns a randomised [string](https://docs.microsoft.com/en-us/dotnet/api/system.string).  
 There are overloaded methods for prefixing and setting length of the returned string.  
 There is a settable property, `StringCharacters`, for which letters are included in the returned string.  
-There is a settable property, `StringLength`, for the length of the returned string.
+There is a settable property, `StringLength`, for the length of the returned string. Standard length is 8.
 
 	string String();
 	string String(int length);

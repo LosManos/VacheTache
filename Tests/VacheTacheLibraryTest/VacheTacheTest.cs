@@ -810,6 +810,20 @@ namespace VacheTacheLibraryTest
         }
 
         [TestMethod]
+        public void String_PrefixAndShorterCustomLength_ReturnTruncatedPrefix()
+        {
+            //  #   Arrange.
+            var sut = new VacheTache(2142);
+
+            //  #   Act.
+            sut.StringLength = 4;
+            var res = sut.String("abcdef");
+
+            //  #   Assert.
+            Assert.AreEqual("abcd", res);
+        }
+
+        [TestMethod]
         public void String_PrefixAndShorterLength_ReturnTruncatedPrefix()
         {
             //  #   Arrange.
