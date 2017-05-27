@@ -150,14 +150,6 @@ There is an overloaded method creating an integer in an interval.
 	int Int();
 	int Int(int minValue, int maxValue);
 
-### Letter
-**TBA**  
-Will work like `String(1)` but only letters (A-Za-Z). It will, just like `String` have a settable property with characters to choose from.
-
-### Letters
-**TBA**
-Will work like `String(n)` but withe letters like `Letter`.
-
 ### OneOf
 This method returns an item of the list of items provided.
 
