@@ -1,23 +1,23 @@
-namespace KaosKoLibraryTest
+namespace VacheTacheLibraryTest
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using KaosKoLibrary;
+    using VacheTacheLibrary;
     using System.Linq;
     using System.Collections.Generic;
     using System.Globalization;
 
     [TestClass]
-    public class KaosKoTest
+    public class VacheTacheTest
     {
         #region Constructor tests.
 
         [TestMethod]
-        public void KaosKo_DifferentSeed_ReturnDifferentResult()
+        public void VacheTache_DifferentSeed_ReturnDifferentResult()
         {
             //  #   Arrange.
-            var sut1 = new KaosKo(1);
-            var sut2 = new KaosKo(2);
+            var sut1 = new VacheTache(1);
+            var sut2 = new VacheTache(2);
 
             //  #   Act.
             var res1 = sut1.PositiveInt();
@@ -28,12 +28,12 @@ namespace KaosKoLibraryTest
         }
 
         [TestMethod]
-        public void KaosKo_NoSeed_ReturnDifferentResult()
+        public void VacheTache_NoSeed_ReturnDifferentResult()
         {
             //  #   Arrange.
-            var sut1 = new KaosKo();
+            var sut1 = new VacheTache();
             System.Threading.Thread.Sleep(1);
-            var sut2 = new KaosKo();
+            var sut2 = new VacheTache();
 
             //  #   Act.
             var res1 = sut1.PositiveInt();
@@ -44,15 +44,15 @@ namespace KaosKoLibraryTest
         }
 
         [TestMethod]
-        public void KaosKo_HashCodeFunc_CustomMethod_UseIt()
+        public void VacheTache_HashCodeFunc_CustomMethod_UseIt()
         {
             //  #   Arrange.
             // Create a hashing function that always returns the same hash code.
            var hashingFunction = new Func<int, int>(s => 0);
 
             //  #   Act.
-            var res1 = new KaosKo(hashingFunction, 42).PositiveInt();
-            var res2 = new KaosKo(hashingFunction, 43).PositiveInt();
+            var res1 = new VacheTache(hashingFunction, 42).PositiveInt();
+            var res2 = new VacheTache(hashingFunction, 43).PositiveInt();
 
             //  #   Assert.
             Assert.AreEqual(res1, res2);
@@ -60,12 +60,12 @@ namespace KaosKoLibraryTest
         }
 
         [TestMethod]
-        public void KaosKo_SameSeed_ReturnSameResult()
+        public void VacheTache_SameSeed_ReturnSameResult()
         {
             //  #   Arrange.
             const long Seed = 42;
-            var sut1 = new KaosKo(Seed);
-            var sut2 = new KaosKo(Seed);
+            var sut1 = new VacheTache(Seed);
+            var sut2 = new VacheTache(Seed);
 
             //  #   Act.
             var res1 = new[] { sut1.PositiveInt(), sut1.PositiveInt(), sut1.PositiveInt() };
@@ -83,7 +83,7 @@ namespace KaosKoLibraryTest
         public void Bool_ReturnBool()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
             var results = new int[2];
 
             //  #   Act and Assert.
@@ -105,7 +105,7 @@ namespace KaosKoLibraryTest
         public void Currency_ReturnTypeEveryOneHundredthFraction()
         {
             decimal value = 0;
-            var sut = new KaosKo(2204);
+            var sut = new VacheTache(2204);
             Assert.AreEqual(
                 value.GetType(),
                 sut.Currency().GetType(), 
@@ -129,7 +129,7 @@ namespace KaosKoLibraryTest
         public void Currency_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2209);
+            var sut = new VacheTache(2209);
 
             //  #   Act.
             var res = new[] { sut.Currency(), sut.Currency(), sut.Currency() };
@@ -145,7 +145,7 @@ namespace KaosKoLibraryTest
         public void Currency_MinMax_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2209);
+            var sut = new VacheTache(2209);
             const int Min = -13;
             const int Max = 33;
 
@@ -163,7 +163,7 @@ namespace KaosKoLibraryTest
         public void Currency_MinMax_ReturnBetween()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2222);
+            var sut = new VacheTache(2222);
             const int Min = -12;
             const int Max = 25;
             var euroResults = new Dictionary<int, int>();
@@ -199,7 +199,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -213,7 +213,7 @@ namespace KaosKoLibraryTest
         public void Date_FromAndTo_ReturnDateBetween()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
             var Min = new DateTime(2017, 05, 12);
             var Max = new DateTime(2018, 06, 10);
             var results = new int[(Max - Min).Days];
@@ -241,7 +241,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -262,7 +262,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -277,7 +277,7 @@ namespace KaosKoLibraryTest
         //public void Decimal_Interval_ReturnDecimalBetween()
         //{
         //    //  #   Arrange.
-        //    var sut = new KaosKo(42);
+        //    var sut = new VacheTache(42);
         //    const decimal Min = -1.234m;
         //    const decimal Max = 2.345m;
 
@@ -312,7 +312,7 @@ namespace KaosKoLibraryTest
         public void Enum_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2315);
+            var sut = new VacheTache(2315);
 
             //  #   Act.
             var res = new[] { sut.Enum<MyEnum>(), sut.Enum<MyEnum>(), sut.Enum<MyEnum>() };
@@ -328,7 +328,7 @@ namespace KaosKoLibraryTest
         public void Enum_ReturnWithinInterval()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2327);
+            var sut = new VacheTache(2327);
             var results = new Dictionary<MyEnum, int>();
 
             //  #   Act.
@@ -348,7 +348,7 @@ namespace KaosKoLibraryTest
         public void EnumExcept_Enum_ReturnExceptParameter()
         {
             // #   Arrange.
-            var sut = new KaosKo(2205);
+            var sut = new VacheTache(2205);
             var results = new Dictionary<MyEnum, int>();
 
             for (int i = 0; i < 1_000_000; i++)
@@ -369,7 +369,7 @@ namespace KaosKoLibraryTest
         public void EnumExcept_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2206);
+            var sut = new VacheTache(2206);
 
             //  #   Act.
             var res = new[] { sut.EnumExcept(MyEnum.a), sut.EnumExcept(MyEnum.painful), sut.EnumExcept(MyEnum.truth) };
@@ -389,7 +389,7 @@ namespace KaosKoLibraryTest
         public void Guid_ReturnValidGuid()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -407,7 +407,7 @@ namespace KaosKoLibraryTest
         public void OneOf_ListOfOne_ReturnTheItem()
         {
             //  #   Arrange.
-            var sut = new KaosKo(1820);
+            var sut = new VacheTache(1820);
             var lst = new[] { "E" };
 
             //  #   Act and Assert.
@@ -422,7 +422,7 @@ namespace KaosKoLibraryTest
         public void OneOf_ReturnAllInList()
         {
             //  #   Arrange.
-            var sut = new KaosKo(1820);
+            var sut = new VacheTache(1820);
             var lst = new[] { "A", "B", "C", "D", "E" };
             var results = new Dictionary<string, int>();
 
@@ -443,7 +443,7 @@ namespace KaosKoLibraryTest
         public void OneOf_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(1820);
+            var sut = new VacheTache(1820);
             var lst = new[] { "A", "B", "C", "D", "E" };
 
             //  #   Act.
@@ -469,7 +469,7 @@ namespace KaosKoLibraryTest
         {
             //  #   Arrange.
             var expectedResultDecimal = decimal.Parse(expectedResult, CultureInfo.InvariantCulture);
-            var sut = new KaosKo(2156);
+            var sut = new VacheTache(2156);
 
             //  #   Act.
             var res = sut.Currency(0, 100, numberOfDecimals);
@@ -488,7 +488,7 @@ namespace KaosKoLibraryTest
         {
             //  #   Arrange.
             var expectedResultDecimal = decimal.Parse(expectedResult, CultureInfo.InvariantCulture);
-            var sut = new KaosKo(2156);
+            var sut = new VacheTache(2156);
 
             //  #   Act.
             sut.NumberOfCurrencyDecimals = numberOfDecimals;
@@ -506,7 +506,7 @@ namespace KaosKoLibraryTest
             //  So lets fall back to calling it to make sure we have tested the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and Assert.
             for (int i = 0; i < 1_000_000; i++)
@@ -520,7 +520,7 @@ namespace KaosKoLibraryTest
         public void Int_MinAndMax_ReturnBetweenInclusiveMinAndExclusiveMax()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
             const int Min = -12;
             const int Max = 420;
             var results = new int[Max-Min];
@@ -552,7 +552,7 @@ namespace KaosKoLibraryTest
         public void PositiveInt_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act.
             var res = new[] { sut.PositiveInt(), sut.PositiveInt(), sut.PositiveInt() };
@@ -568,7 +568,7 @@ namespace KaosKoLibraryTest
         public void PositiveInt_ReturnPositive()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and assert.
             for (int i = 0; i <= 1_000_000; i++)
@@ -582,7 +582,7 @@ namespace KaosKoLibraryTest
         public void PositiveInt_Max_ReturnBelow()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
             const int Max = 43;
             var results = new int[Max-1];
 
@@ -609,7 +609,7 @@ namespace KaosKoLibraryTest
         public void PositiveLong_ReturnPredictableResult()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act.
             var res = new[] { sut.PositiveLong(), sut.PositiveLong(), sut.PositiveLong() };
@@ -628,7 +628,7 @@ namespace KaosKoLibraryTest
             // but at least we have called it to secure the interface.
 
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
 
             //  #   Act and assert.
             for (int i = 0; i <= 1_000_000; i++)
@@ -643,7 +643,7 @@ namespace KaosKoLibraryTest
         public void PositiveLong_Max_ReturnBelow()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
             const long Max = 45;
             var results = new long[Max - 1];
 
@@ -667,7 +667,7 @@ namespace KaosKoLibraryTest
         public void PositiveLong_MinAndMax_ReturnBelow()
         {
             //  #   Arrange.
-            var sut = new KaosKo(42);
+            var sut = new VacheTache(42);
             const long Min = 21;
             const long Max = 45;
             var results = new long[Max - Min];
@@ -696,7 +696,7 @@ namespace KaosKoLibraryTest
         public void String_BePredictable()
         {
             //  #   Arrange.
-            var sut = new KaosKo(55);
+            var sut = new VacheTache(55);
 
             //  #   Act.
             var res = new[] { sut.String(), sut.String(), sut.String() };
@@ -713,7 +713,7 @@ namespace KaosKoLibraryTest
         {
             //  #   Arrange.
             const string Characters = "abcDEF";
-            var sut = new KaosKo(2106);
+            var sut = new VacheTache(2106);
             sut.StringCharacters = Characters;
             var results = new Dictionary<string, int>(); ;
 
@@ -732,7 +732,7 @@ namespace KaosKoLibraryTest
         public void String_CustomStringLength_ReturnStringWithSetLength()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2132);
+            var sut = new VacheTache(2132);
             sut.StringLength = 6;
 
             //  #   Act.
@@ -746,7 +746,7 @@ namespace KaosKoLibraryTest
         public void String_Length_ReturnStringWithLength()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2132);
+            var sut = new VacheTache(2132);
             const int Length = 7;
             Assert.AreNotEqual(Length, sut.StringLength, "Sobriety test that we don't set the length to StringLength.");
 
@@ -761,7 +761,7 @@ namespace KaosKoLibraryTest
         public void String_NullPrefix_ReturnNonPrefixedString()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2142);
+            var sut = new VacheTache(2142);
 
             //  #   Act.
             var res = sut.String(null);
@@ -774,7 +774,7 @@ namespace KaosKoLibraryTest
         public void String_Prefix_ReturnPrefixedString()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2142);
+            var sut = new VacheTache(2142);
 
             //  #   Act.
             var res = sut.String("321");
@@ -787,7 +787,7 @@ namespace KaosKoLibraryTest
         public void String_NullPrefixAndLength_ReturnNonPrefixedStringOfLength()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2142);
+            var sut = new VacheTache(2142);
 
             //  #   Act.
             var res = sut.String(null, 3);
@@ -800,7 +800,7 @@ namespace KaosKoLibraryTest
         public void String_PrefixAndLength_ReturnPrefixedString()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2142);
+            var sut = new VacheTache(2142);
 
             //  #   Act.
             var res = sut.String("321", 5);
@@ -813,7 +813,7 @@ namespace KaosKoLibraryTest
         public void String_PrefixAndShorterLength_ReturnTruncatedPrefix()
         {
             //  #   Arrange.
-            var sut = new KaosKo(2142);
+            var sut = new VacheTache(2142);
 
             //  #   Act.
             var res = sut.String("abcdef", 3);

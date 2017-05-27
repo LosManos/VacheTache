@@ -1,11 +1,10 @@
-﻿namespace KaosKoLibrary
+﻿namespace VacheTacheLibrary
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
-    public class KaosKo
+    public class VacheTache
     {
         protected Random _rand;
 
@@ -21,7 +20,7 @@
         /// <param name="seed">Optional. 
         /// If left out DateTime.UtcNow.Ticks is used for seeding the randomising.
         /// If provided the parameter is used for seeding the randomising.</param>
-        public KaosKo(long? seed = null)
+        public VacheTache(long? seed = null)
             : this(HashCode, seed ?? DateTime.UtcNow.Ticks)
         {
         }
@@ -30,7 +29,7 @@
         /// </summary>
         /// <param name="hashCodeFunc"></param>
         /// <param name="seed"></param>
-        public KaosKo(Func<int, int> hashCodeFunc, long seed)
+        public VacheTache(Func<int, int> hashCodeFunc, long seed)
         {
             var intSeed = unchecked((int)seed);
             _rand = new Random(hashCodeFunc(intSeed));

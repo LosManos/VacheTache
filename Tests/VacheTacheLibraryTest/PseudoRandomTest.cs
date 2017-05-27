@@ -1,6 +1,6 @@
 ﻿namespace PseudoRandomLibraryTest
 {
-    using KaosKoLibrary;
+    using VacheTacheLibrary;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
 

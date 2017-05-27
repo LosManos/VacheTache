@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-
-namespace KaosKoLibrary
+﻿namespace VacheTacheLibrary
 {
-    public class PseudoRandom : KaosKo
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public class PseudoRandom : VacheTache
     {
         /// <summary>This constructor behaves like he default constructor
         /// and is used for seeding the random values with a known seed.

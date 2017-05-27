@@ -1,39 +1,39 @@
-# KaosKo
+# VacheTache
 
-Version 1.3.0
+Version 1.0.0
 
 This library is licensed under LGPLv3 license.  
 This means that you are free to use this library in your (commercial) product as long as  you
-1) attach the code for KaosKo
-1) and any updates you have made to KaosKo
-1) and the license for KaosKo  
+1) attach the code for VacheTache
+1) and any updates you have made to VacheTache
+1) and the license for VacheTache  
 
 to every customer of your (commercial) product.  
 Your existing (commercial) product is not affected.
 
-## KaosKo class
+## VacheTache class
 
-KaosKo is a class for randomising different types of data.
+VacheTache is a class for randomising different types of data.
 
 ## PseudoRandom class
 
-PseudoRandom has a slightly different raison d'ètre than KaosKo.
+PseudoRandom has a slightly different raison d'ètre than VacheTache.
 Namely to *not* generate randomised data but determistic data. This is for instance used for automatic tests where one wants to know the input and hence output.  
-It is really just a descendant of KaosKo with a nifty constructor and a name that reminds of its purpose.
+It is really just a descendant of VacheTache with a nifty constructor and a name that reminds of its purpose.
 
 ## Constructors
 
-### KaosKo
+### VacheTache
 The default constructor has an optional long parameter.  
 It not provided DateTime.UtcNow.Ticks is used.  
 This makes it easy to create the class and have randomised values.
 
-	KaosKo(long? seed = null);
-	KaosKo(Func<int,int> hashCodeFunc, long seed);
+	VacheTache(long? seed = null);
+	VacheTache(Func<int,int> hashCodeFunc, long seed);
 
 #### Examples
 
-	var kk = new KaosKo();
+	var kk = new VacheTache();
 	var address = kk.String("ADR-");
 	// address is now somethign like "ADR-kdIChE".
 
@@ -157,7 +157,7 @@ This method returns an item of the list of items provided.
 
 #### Examples
 
-	var pr = new KaosKo();
+	var pr = new VacheTache();
 	var freedomBraves = pr.OneOf(new[]{"Assange", "Manning", "Hood", "Ghandi", "Mandela"});
 	// freedomBraves becomes something like "Manning".
 

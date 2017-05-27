@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Copyright>LGPLv3</Copyright>
+    <PackageLicenseUrl>https://www.gnu.org/licenses/lgpl-3.0.txt</PackageLicenseUrl>
+    <Authors>LosManos</Authors>
+    <Company>LosManos</Company>
+    <Product>VacheTacheLibrary</Product>
+    <Description>VacheTache is a library for randomising different types of data in both a randomised way and a deterministic way.</Description>
+    <PackageProjectUrl>https://github.com/LosManos/VacheTache</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LosManos/VacheTache</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.0\VacheTache.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
