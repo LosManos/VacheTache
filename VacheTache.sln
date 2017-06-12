@@ -11,9 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacheTacheLibrary", "VacheTacheLibrary\VacheTacheLibrary.csproj", "{57E930DF-9C33-45B4-8116-31FEA62EB943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacheTacheLibraryTest", "Tests\VacheTacheLibraryTest\VacheTacheLibraryTest.csproj", "{3EC3D437-524E-4A5C-9E2F-B4645D723C6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacheTacheLibraryTest", "Tests\VacheTacheLibraryTest\VacheTacheLibraryTest.csproj", "{3EC3D437-524E-4A5C-9E2F-B4645D723C6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRandom", "BusinessRandom\BusinessRandom.csproj", "{EC89E0F5-A729-4E3E-A8E8-65BE0A044B1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacheTacheLibrary", "VacheTacheLibrary\VacheTacheLibrary.csproj", "{A1CCE051-EE3B-4B8C-8F59-583D34B6DD29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRandomTest", "Tests\BusinessRandomTest\BusinessRandomTest.csproj", "{7EB292A5-FBF6-4129-8A73-63A505625DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessExample", "Tests\BusinessExample\BusinessExample.csproj", "{7E7CCB24-FF60-44FB-BF24-3F5BA2ADA13D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,19 +27,33 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57E930DF-9C33-45B4-8116-31FEA62EB943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57E930DF-9C33-45B4-8116-31FEA62EB943}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57E930DF-9C33-45B4-8116-31FEA62EB943}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57E930DF-9C33-45B4-8116-31FEA62EB943}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3EC3D437-524E-4A5C-9E2F-B4645D723C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3EC3D437-524E-4A5C-9E2F-B4645D723C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC3D437-524E-4A5C-9E2F-B4645D723C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC3D437-524E-4A5C-9E2F-B4645D723C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC89E0F5-A729-4E3E-A8E8-65BE0A044B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC89E0F5-A729-4E3E-A8E8-65BE0A044B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC89E0F5-A729-4E3E-A8E8-65BE0A044B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC89E0F5-A729-4E3E-A8E8-65BE0A044B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CCE051-EE3B-4B8C-8F59-583D34B6DD29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CCE051-EE3B-4B8C-8F59-583D34B6DD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CCE051-EE3B-4B8C-8F59-583D34B6DD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CCE051-EE3B-4B8C-8F59-583D34B6DD29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB292A5-FBF6-4129-8A73-63A505625DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB292A5-FBF6-4129-8A73-63A505625DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB292A5-FBF6-4129-8A73-63A505625DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB292A5-FBF6-4129-8A73-63A505625DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E7CCB24-FF60-44FB-BF24-3F5BA2ADA13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E7CCB24-FF60-44FB-BF24-3F5BA2ADA13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E7CCB24-FF60-44FB-BF24-3F5BA2ADA13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E7CCB24-FF60-44FB-BF24-3F5BA2ADA13D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3EC3D437-524E-4A5C-9E2F-B4645D723C6E} = {D4B5A2FA-1365-4715-9CF2-7AA8668848BB}
+		{7EB292A5-FBF6-4129-8A73-63A505625DF4} = {D4B5A2FA-1365-4715-9CF2-7AA8668848BB}
+		{7E7CCB24-FF60-44FB-BF24-3F5BA2ADA13D} = {D4B5A2FA-1365-4715-9CF2-7AA8668848BB}
 	EndGlobalSection
 EndGlobal
