@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="VacheTacheLibrary" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\BusinessRandom\BusinessRandom.csproj" />
-    <ProjectReference Include="..\..\VacheTacheLibrary\VacheTacheLibrary.csproj" />
   </ItemGroup>
 
 </Project>

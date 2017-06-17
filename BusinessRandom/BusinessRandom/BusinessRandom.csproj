@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VacheTacheLibrary\VacheTacheLibrary.csproj" />
+    <PackageReference Include="VacheTacheLibrary" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
