@@ -10,8 +10,13 @@
 
         public string StringCharacters { get; set; } = "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+        /// <summary>This is the standard length of the string returned by <see cref="String"/>.
+        /// </summary>
         public int StringLength { get; set; } = 8;
 
+        /// <summary>This is the standard amount of decimals returned by <see cref="Currency"/>.
+        /// AFAIK there is only Yen that differs with 0 decimals.
+        /// </summary>
         public int NumberOfCurrencyDecimals = 2;
 
         /// <summary>This constructor behaves like he default constructor
@@ -46,7 +51,7 @@
 
         /// <summary>This method returns a positive randomised currency
         /// Higher or equal to <see cref="Int.Min"/> and less than <see cref="Int.Max"/>.
-        /// A currency is a value like Euro and Cents, 12.34 for instance.
+        /// A currency is a value like Euro and Cents, 12.34 for instance; 2 andn only 2 decimals. Use <see cref="NumberOfCurrencyDecimals" to change this.
         /// </summary>
         /// <returns></returns>
         public decimal Currency()
@@ -55,9 +60,9 @@
         }
 
         /// <summary>This method returns a randomised currency.
-        /// A currency is a value like Euro and Cents, 12.34 for instance.
+        /// A currency is a value like Euro and Cents, 12.34 for instance; 2 and only 2 decimals. Use <see cref="NumberOfCurrencyDecimals" to change this.
         /// Min is the lowest returned value and can be returned.
-        /// Max is above returned value and cannot be returned.
+        /// Max is above returned value and cannot be returned. See dotnet's Random.Next method for similar behaviour.
         /// The number of decimals (cent) in the result is specified in <see cref="NumberOfCurrencyDecimals"/> which has default value 2.
         /// </summary>
         /// <param name="min">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
@@ -69,9 +74,9 @@
         }
 
         /// <summary>This method returns a randomised currency.
-        /// A currency is a value like Euro and Cents, 12.34 for instance.
+        /// A currency is a value like Euro and Cents, 12.34 for instance. 2 and only 2 decimals. Use <see cref="NumberOfCurrencyDecimals" to change this.
         /// Min is the lowest returned value and can be returned.
-        /// Max is above returned value and cannot be returned.
+        /// Max is above returned value and cannot be returned. See dotnet's Random.Next method for similar behaviour.
         /// </summary>
         /// <param name="min">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
         /// <param name="max">This parameter is of type int, instead of decimal, because we have no way to randomise decimal within an interval.</param>
