@@ -17,9 +17,14 @@ VacheTache is a class for randomising different types of data.
 
 ## PseudoRandom class
 
-PseudoRandom has a slightly different raison d'�tre than VacheTache.
+PseudoRandom has a slightly different raison d'ètre than VacheTache.
 Namely to *not* generate randomised data but determistic data. This is for instance used for automatic tests where one wants to know the input and hence output.  
 It is really just a descendant of VacheTache with a nifty constructor and a name that reminds of its purpose.
+
+## Stability
+
+Most methods are ok but some are the first naïve implementation.  
+With that said, many of the methods have been copied to a "real" system where they, by the time of writing, are running.
 
 ## Constructors
 
