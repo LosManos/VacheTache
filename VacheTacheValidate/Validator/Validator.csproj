@@ -43,6 +43,7 @@
     <Compile Include="Beta\ValidationResult.cs" />
     <Compile Include="Beta\Validator.cs" />
     <Compile Include="Beta\ValidatorEngine.cs" />
+    <Compile Include="Beta\ValidatorList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

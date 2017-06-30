@@ -49,8 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Customer.cs" />
+    <Compile Include="BusinessObjects\Project.cs" />
     <Compile Include="ValidateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorEngineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

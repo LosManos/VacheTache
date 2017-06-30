@@ -1,8 +1,8 @@
 ﻿namespace VacheTache.ValidateTest
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using BusinessObjects;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Validator.Beta;
 
@@ -10,7 +10,7 @@
     public class ValidateTests
     {
         [TestMethod]
-        public void TestRenameMe()
+        public void ExampleValidationSuccess()
         {
             var customer = new Customer
             {
@@ -19,36 +19,43 @@
             
             var sut = new CustomerValidator();
 
-            var res = sut.Validate(customer, sut.EntityValidators);
+            var res = sut.Validate(customer, CustomerValidator.EntityValidators).ToList();
 
-            Assert.AreEqual(1, res.Count());
-            Assert.IsFalse(res.Single().IsValid);
+            Assert.AreEqual(0, res.Count());
         }
-    }
 
-    public class Customer
-    {
-        public string Name { get; set; }
+        [TestMethod]
+        public void ExampleValidationFail()
+        {
+            var customer = new Customer
+            {
+                Name = "12345678901"
+            };
 
-        public IList<Project> Projects { get; set; }
-    }
+            var sut = new CustomerValidator();
 
-    public class Project
-    {
-        public string Name { get; set; }
+            var res = sut.Validate(customer, CustomerValidator.EntityValidators).ToList();
+
+            Assert.AreEqual(2, res.Count);
+            Assert.IsFalse(res[0].IsValid);
+            Assert.IsFalse(res[1].IsValid);
+        }
     }
 
     public class CustomerValidator : ValidatorEngine<Customer>
     {
-        public static Func<Customer, bool> HasName = c => string.IsNullOrWhiteSpace(c.Name);
+        public static Func<Customer, bool> HasName = c => string.IsNullOrWhiteSpace(c.Name) == false;
         public static Validator<Customer>.ValidatorFunction NameLength = c => (c?.Name ?? string.Empty).Length <= 10;
-
-        public readonly ValidatorList<Customer> EntityValidators = new ValidatorList<Customer>(
+        public static Validator<Customer>.ValidatorFunction StartsWithCapitalLetter =
+            c => (c.Name ?? string.Empty).Any() && char.IsUpper(c.Name[0]);
+        
+        public static readonly ValidatorList<Customer> EntityValidators = new ValidatorList<Customer>(
             new Validator<Customer>("HasName", c => HasName(c)),
-            new Validator<Customer>("NameLength", c => NameLength(c))
+            new Validator<Customer>("NameLength", c => NameLength(c)), 
+            new Validator<Customer>("CapitalStart", c => StartsWithCapitalLetter(c))
         );
 
-        public bool Validate(Customer customer)
+        public static bool Validate(Customer customer)
         {
             return IsValid(customer, EntityValidators);
         }
