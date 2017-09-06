@@ -66,7 +66,7 @@ or if you prefer as an instance variable like so:
 	[TestClass]
 	public class MyTests
 	{
-		private PseudoRandom pr;
+		private PseudoRandom _pr;
 
 		// Since this property exists it is set by magic by the Mstest testing framework.
 		public TestContext TestContext { get; set; }
@@ -75,7 +75,7 @@ or if you prefer as an instance variable like so:
 		[TestInitialize]
 		public void Setup()
 		{
-			pr = new PseudoRandom(TestContext.TestName);
+			_pr = new PseudoRandom(TestContext.TestName);
 		}
 
 		[TestMethod]
