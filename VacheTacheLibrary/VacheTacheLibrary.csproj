@@ -13,6 +13,9 @@
     <RepositoryUrl>https://github.com/LosManos/VacheTache</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageId>VacheTache</PackageId>
+    <Title>VacheTache library</Title>
+    <PackageReleaseNotes>First.</PackageReleaseNotes>
+    <Summary>Library for deterministic randomising.</Summary>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
