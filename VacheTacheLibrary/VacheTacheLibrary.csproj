@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/LosManos/VacheTache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/LosManos/VacheTache</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
+    <PackageId>VacheTache</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
