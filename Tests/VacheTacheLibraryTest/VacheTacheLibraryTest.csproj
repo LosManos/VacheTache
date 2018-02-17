@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\VacheTacheLibrary\VacheTacheLibrary.csproj" />
-    <ProjectReference Include="..\VacheTacheLibrary\VacheTacheLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
