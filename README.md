@@ -1,6 +1,7 @@
 # VacheTache
 
-Version 1.0.0
+Version 1.0.0  
+Nuget: https://www.nuget.org/packages/VacheTache/
 
 This library is licensed under LGPLv3 license.  
 This means that you are free to use this library in your (commercial) product as long as  you
