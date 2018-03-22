@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>LGPLv3</Copyright>
     <PackageLicenseUrl>https://www.gnu.org/licenses/lgpl-3.0.txt</PackageLicenseUrl>
     <Authors>LosManos</Authors>
@@ -14,12 +14,17 @@
     <RepositoryType>Git</RepositoryType>
     <PackageId>VacheTache</PackageId>
     <Title>VacheTache library</Title>
-    <PackageReleaseNotes>First.</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Summary>Library for deterministic randomising.</Summary>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard1.0\VacheTache.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Update="NETStandard.Library" Version="2.0.1" />
+  </ItemGroup>
 
 </Project>

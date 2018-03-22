@@ -1,16 +1,6 @@
 # VacheTache
 
-Version 1.0.0  
-Nuget: https://www.nuget.org/packages/VacheTache/
-
-This library is licensed under LGPLv3 license.  
-This means that you are free to use this library in your (commercial) product as long as  you
-1) attach the code for VacheTache
-1) and any updates you have made to VacheTache
-1) and the license for VacheTache  
-
-to every customer of your (commercial) product.  
-Your existing (commercial) product is not affected.
+Version 1.1.0  
 
 ## VacheTache class
 
@@ -21,6 +11,18 @@ VacheTache is a class for randomising different types of data.
 PseudoRandom has a slightly different raison d'ètre than VacheTache.
 Namely to *not* generate randomised data but determistic data. This is for instance used for automatic tests where one wants to know the input and hence output.  
 It is really just a descendant of VacheTache with a nifty constructor and a name that reminds of its purpose.
+
+Nuget: https://www.nuget.org/packages/VacheTache/
+
+## License
+This library is licensed under LGPLv3 license.  
+This means that you are free to use this library in your (commercial) product as long as  you
+1) attach the code for VacheTache
+1) and any updates you have made to VacheTache
+1) and the license for VacheTache  
+
+to every customer of your (commercial) product.  
+Your existing (commercial) product is not affected.
 
 ## Stability
 
