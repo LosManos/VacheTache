@@ -9,8 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		BuildNugetPackage.ps1 = BuildNugetPackage.ps1
 		License.txt = License.txt
+		PseudoRandom.md = PseudoRandom.md
 		README.md = README.md
 		Release.md = Release.md
+		VacheTache.FileSystem.FileSystemHelper.md = VacheTache.FileSystem.FileSystemHelper.md
+		VacheTache.md = VacheTache.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacheTacheLibrary", "VacheTacheLibrary\VacheTacheLibrary.csproj", "{57E930DF-9C33-45B4-8116-31FEA62EB943}"

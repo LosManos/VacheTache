@@ -9,7 +9,7 @@ namespace VacheTacheLibrary.FileSystem
 
         public class DirectoryEntity
         {
-            /// <summary>This proprerty returns the Path only, no Filename.
+            /// <summary>This property returns the Path only, no Filename.
             /// </summary>
             public string Path { get; private set; }
 

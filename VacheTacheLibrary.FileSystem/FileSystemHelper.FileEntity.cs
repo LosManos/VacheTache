@@ -1,5 +1,4 @@
-﻿using System;
-using IO = System.IO;
+﻿using IO = System.IO;
 
 namespace VacheTacheLibrary.FileSystem
 {
@@ -17,11 +16,13 @@ namespace VacheTacheLibrary.FileSystem
             /// </summary>
             public string Path { get; private set; }
 
-            public long SizeInBytes { get; private set; }
-
             /// <summary>This property returns the Pathfile; that is Path and Filename.
             /// </summary>
             public string Pathfile { get { return IO.Path.Combine(Path ?? string.Empty, Filename); } }
+
+            /// <summary>This property returns the size, in bytes.
+            /// </summary>
+            public long SizeInBytes { get; private set; }
 
             public FileEntity WithFilename(string filename)
             {
