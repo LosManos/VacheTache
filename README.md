@@ -6,9 +6,9 @@ Version 1.1.0
 
 `VacheTache` is a class for randomising different types of data.
 
-[`VacheTache` class documentation](//github.com/LosManos/VacheTache/blob/master/VacheTache.md)
+[`VacheTache` documentation](//github.com/LosManos/VacheTache/blob/master/VacheTache.md)
 
-## VacheTache.FileSystem
+## VacheTache.FileSystem class
 
 Class `VacheTache.FileSystem.FileSystemHelper` contains classes for creating folders and files in an easy way in automatic testing environments.
 
@@ -20,7 +20,7 @@ Class `VacheTache.FileSystem.FileSystemHelper` contains classes for creating fol
 Namely to *not* generate randomised data but determistic data. This is for instance used for automatic tests where one wants to know the input and hence output.  
 Technically it is really just a descendant of `VacheTache` with a nifty constructor and a name that reminds of its purpose.
 
-[`PseudoRandom` class documentation](//github.com/LosManos/VacheTache/blob/master/PseudoRandom.md)
+[`PseudoRandom` documentation](//github.com/LosManos/VacheTache/blob/master/PseudoRandom.md)
 
 ## Nuget
 https://www.nuget.org/packages/VacheTache/
@@ -39,7 +39,3 @@ Your existing (commercial) product is not affected.
 
 Most methods are ok but some are the first naïve implementation.  
 With that said, many of the methods have been copied to a real system where they, by the time of writing, are running. Or at least lat time I talked to them.
-
-## Constructors
-
-
