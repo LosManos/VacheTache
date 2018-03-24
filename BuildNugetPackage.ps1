@@ -1,7 +1,4 @@
-Write-Host 'Packing the nuget package.'
-
-Write-Host 'If you haven''t set to compile as Release, do that now.'
-Read-Host 'Press enter to continue.';
+Write-Host 'Packing the nuget package in Release.'
 
 pushd VacheTacheLibrary
 .\..\nuget.exe pack -Prop Configuration=Release
