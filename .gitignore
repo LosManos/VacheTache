@@ -8,3 +8,4 @@ packages/
 *.ncrunchsolution
 *.user
 _NCrunch*
+nCrunchTemp*
