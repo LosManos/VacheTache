@@ -1,9 +1,14 @@
 Write-Host 'Packing the nuget package in Release.'
 
-pushd VacheTacheLibrary
-.\..\nuget.exe pack -Prop Configuration=Release
-popd
+$msbuildexe = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe'
 
-pushd VacheTacheLibrary.FileSystem
-.\..\nuget.exe pack -Prop Configuration=Release
-popd
+function BuildNugetPackage( $name){
+	pushd $name
+	& $msbuildexe -t:pack -p:Configuration=Release
+	Get-ChildItem bin/release
+	popd
+}
+
+BuildNugetPackage VacheTacheLibrary
+
+BuildNugetPackage 'VacheTacheLibrary.FileSystem'
