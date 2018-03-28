@@ -70,26 +70,29 @@ namespace VacheTacheLibrary.FileSystem
                 {
                     IO.Directory.CreateDirectory(Path);
                 }
-                //if ( Path == null)
-                //{
-                //    throw new ArgumentNullException("Path");
-                //}
+
                 if (Filename != null)
                 {
-                    if (IO.File.Exists(Pathfile) == false)
+                    if (IO.File.Exists(Pathfile) == false ||
+                        new IO.FileInfo(Pathfile).Length != SizeInBytes)
                     {
-                        // There is certainly a faster way to create the file
-                        // but his will do for now.
-                        using (var stream = IO.File.Create(Pathfile))
-                        {
-                            for (var n = 0; n < SizeInBytes; ++n)
-                            {
-                                stream.Write(new[] { (byte)42 }, 0, 1);
-                            }
-                        }
+                        MakeExistFile(Pathfile, SizeInBytes);
                     }
                 }
                 return this;
+            }
+
+            #region Private helper methods.
+
+            /// <summary>This method makes certain a file of a certain size exists.
+            /// The file can exist beforehand.
+            /// </summary>
+            /// <param name="pathfile"></param>
+            /// <param name="sizeInBytes"></param>
+            private static void MakeExistFile(string pathfile, long sizeInBytes)
+            {
+                IO.File.Delete(pathfile);
+                WriteFile(pathfile, sizeInBytes);
             }
 
             /// <summary>This method splits a pathfile to a Path and a File.
@@ -100,6 +103,29 @@ namespace VacheTacheLibrary.FileSystem
             {
                 return (IO.Path.GetDirectoryName(pathfile), IO.Path.GetFileName(pathfile));
             }
+
+            /// <summary>This method writes a file of a cetain size.
+            /// The file must not exist beforehand.
+            /// </summary>
+            /// <param name="pathfile"></param>
+            /// <param name="sizeInBytes"></param>
+            private static void WriteFile(
+                string pathfile,
+                long sizeInBytes)
+            {
+                // There is certainly a faster way to create the file
+                // but his will do for now.
+                using (var stream = IO.File.Create(pathfile))
+                {
+                    for (var n = 0; n < sizeInBytes; ++n)
+                    {
+                        //stream.Write(new[] { (byte)42 }, 0, 1);
+                        stream.WriteByte(42);
+                    }
+                }
+            }
+
+            #endregion
         }
     }
 }

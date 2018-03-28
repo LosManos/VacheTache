@@ -16,7 +16,7 @@
     <Title>VacheTache library</Title>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Summary>Library for deterministic randomising.</Summary>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

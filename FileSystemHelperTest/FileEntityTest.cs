@@ -71,7 +71,7 @@ namespace FileSystemHelperTest
         }
 
         [TestMethod]
-        public void GivenPath_SetPath()
+        public void GivenPath_SetPathProperty()
         {
             //  #   Arrange.
             var sut = FileSystemHelper.File;
@@ -85,7 +85,7 @@ namespace FileSystemHelperTest
         }
 
         [TestMethod]
-        public void GivenSize_SetSize()
+        public void GivenSize_SetSizeProperty()
         {
             //  #   Arrange.
             var sut = FileSystemHelper.File;
@@ -134,6 +134,47 @@ namespace FileSystemHelperTest
             //  #   Assert.
             Assert.IsTrue(File.Exists(preexistingFilepath), "This file should exist, just like the Act call makes it.");
             Assert.IsTrue(File.Exists(otherExistingFilepathInDirectory), "Another file in the same folder should not be touched. This check makes sure the directory is not deleted and recreated.");
+        }
+
+        [TestMethod]
+        public void FilenameForExistingFileWithOtherSize_UpdateFile()
+        {
+            //  #   Arrange.
+            Common.MakeEmptyPathExist(ThePath);
+            var preexistingFilepath = Path.Combine(ThePath, Common.AnyFilename(_pr));
+            MakeFileExist(preexistingFilepath, 12);
+
+            //  #   Act.
+            var res = FileSystemHelper.File
+                .WithFilename(preexistingFilepath)
+                .WithSize(24)
+                .MakeExist();
+
+            //  #   Assert.
+            Assert.IsTrue(File.Exists(preexistingFilepath), "This file should exist, just like the Act call makes it.");
+            Assert.AreEqual(24, new FileInfo(preexistingFilepath).Length);
+        }
+
+        [TestMethod]
+        public void FilenameForExistingFileWithSameSize_NotTouchFile()
+        {
+            //  #   Arrange.
+            Common.MakeEmptyPathExist(ThePath);
+            var preexistingFilepath = Path.Combine(ThePath, Common.AnyFilename(_pr));
+            MakeFileExist(preexistingFilepath, 12);
+            var otherExistingFilepathInDirectory = Path.Combine(ThePath, Common.AnyFilename(_pr));
+            MakeFileExist(otherExistingFilepathInDirectory);
+
+            //  #   Act.
+            var res = FileSystemHelper.File
+                .WithFilename(preexistingFilepath)
+                .WithSize(12)
+                .MakeExist();
+
+            //  #   Assert.
+            Assert.IsTrue(File.Exists(preexistingFilepath), "This file should exist, just like the Act call makes it.");
+            Assert.IsTrue(File.Exists(otherExistingFilepathInDirectory), "Another file in the same folder should not be touched. This check makes sure the directory is not deleted and recreated.");
+            Assert.AreEqual(12, res.SizeInBytes);
         }
 
         [TestMethod]
@@ -217,12 +258,21 @@ namespace FileSystemHelperTest
                 message ?? $"Sanity check: The path [{path}] should exist. It does not.");
         }
 
-        private static void MakeFileExist(string pathfile, string message = null)
+        private static void MakeFileExist(
+            string pathfile, 
+            int sizeInBytes = 0,
+            string message = null)
         {
             MakePathExist(Path.GetDirectoryName(pathfile));
             if( File.Exists(pathfile) == false)
             {
-                File.Create(pathfile);
+                using (var stream = File.Create(pathfile))
+                {
+                    for(var n = 0; n < sizeInBytes; ++n)
+                    {
+                        stream.WriteByte((byte)'A');
+                    }
+                }
             }
             Assert.IsTrue(File.Exists(pathfile),
                 message ?? $"Sanity check: The [{pathfile}] should exist. It does not.");
