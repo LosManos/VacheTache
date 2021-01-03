@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      is_push: ${{ github.event_name == 'push' }}
+
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -24,6 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish VacheTache
+      if: ${{ env.PUSH_PACKAGES }}
       uses: brandedoutcast/publish-nuget@v2
       with:
           PROJECT_FILE_PATH: VacheTacheLibrary/VacheTacheLibrary.csproj
