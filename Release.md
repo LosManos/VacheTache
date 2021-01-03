@@ -1,5 +1,8 @@
 # Release for VacheTache
 
+## 1.1 3
+Build update. Tests updated to be OS (i.e. path delimiter) aware.
+
 ## 1.1.2
 Bugfix. An existing file can get a new file size.
 
