@@ -220,11 +220,18 @@ namespace FileSystemHelperTest
             //  #   Arrange.
             var sut = FileSystemHelper.File;
 
-            //  #   Act..
-            sut.WithFilename(@"C:\MyDirectory\MyFile.txt");
+            var pathfile = IsWindows() ?
+                 @"C:\MyDirectory\MyFile.txt" :
+                 @"/mnt/c/MyDirectory/MyFile.txt";
+            var expectedPath = IsWindows() ?
+                @"C:\MyDirectory" :
+                @"/mnt/c/MyDirectory";
 
+            //  #   Act..
+            sut.WithFilename(pathfile);
+            
             //  #   Assert.
-            Assert.AreEqual(@"C:\MyDirectory", sut.Path, "The Path should have been set by the Filename since it contains a path.");
+            Assert.AreEqual(expectedPath, sut.Path, "The Path should have been set by the Filename since it contains a path.");
         }
 
         [TestMethod]
@@ -232,15 +239,24 @@ namespace FileSystemHelperTest
         {
             //  #   Arrange.
             dynamic sutPrivate = new ReachPrivateIn(typeof(FileSystemHelper.FileEntity));
-            var pathfile = @"C:\Temp\File.txt";
+            var pathfile = IsWindows() ?
+                @"C:\Temp\File.txt" :
+                "/mnt/c/Temp/File.txt";
+            var expectedPath = IsWindows() ?
+                @"C:\Temp" :
+                @"/mnt/c/Temp";
 
             //  #   Act.
             var res = sutPrivate.SplitToPathAndFilename(pathfile);
 
             //  #   Assert.
-            Assert.AreEqual(@"C:\Temp", res.Item1);
+            Assert.AreEqual(expectedPath, res.Item1);
             Assert.AreEqual("File.txt", res.Item2);
         }
+
+        private static bool IsWindows() =>
+            System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(
+                System.Runtime.InteropServices.OSPlatform.Windows);
 
         /// <summary>Helper method that makes sure a path exist.
         /// Do not mistake it for the testees similar functionality
