@@ -1,4 +1,4 @@
-name: .NET
+name: build-and-deploy-for-master
 
 on:
   push:
