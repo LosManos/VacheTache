@@ -7,9 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D4B5A2FA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC0D3B24-BE32-4B89-8839-6AEC465CEDB3}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-all-branches.yml = .github\workflows\build-all-branches.yml
 		BuildNugetPackage.ps1 = BuildNugetPackage.ps1
-		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		License.txt = License.txt
+		.github\workflows\only-publish-master.yml = .github\workflows\only-publish-master.yml
 		PseudoRandom.md = PseudoRandom.md
 		README.md = README.md
 		Release.md = Release.md

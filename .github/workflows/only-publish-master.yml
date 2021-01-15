@@ -1,18 +1,13 @@
-name: .NET
+name: only-publish-master
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    env:
-      is_push: ${{ github.event_name == 'push' }}
 
     steps:
     - uses: actions/checkout@v2
@@ -26,8 +21,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish VacheTache
-      if: ${{ env.is_push }}
+    - name: Publish
       uses: brandedoutcast/publish-nuget@v2
       with:
           PROJECT_FILE_PATH: VacheTacheLibrary/VacheTacheLibrary.csproj
