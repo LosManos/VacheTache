@@ -1,4 +1,4 @@
-name: only-publish-master
+name: build-and-publish-master
 
 on:
   push:
