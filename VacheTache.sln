@@ -7,10 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D4B5A2FA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC0D3B24-BE32-4B89-8839-6AEC465CEDB3}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build-all-branches.yml = .github\workflows\build-all-branches.yml
 		BuildNugetPackage.ps1 = BuildNugetPackage.ps1
 		License.txt = License.txt
-		.github\workflows\only-publish-master.yml = .github\workflows\only-publish-master.yml
 		PseudoRandom.md = PseudoRandom.md
 		README.md = README.md
 		Release.md = Release.md
@@ -25,6 +23,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSystemHelperTest", "FileSystemHelperTest\FileSystemHelperTest.csproj", "{BBAFEB86-6753-4C8A-90E8-7F5F91FDE3CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacheTacheLibrary.FileSystem", "VacheTacheLibrary.FileSystem\VacheTacheLibrary.FileSystem.csproj", "{B760D503-FFFB-4CF3-9BB0-0941F46C0796}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github workflows", "Github workflows", "{0B50048A-805A-4D94-940C-E4F97E14B8AC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-all-branches.yml = .github\workflows\build-all-branches.yml
+		.github\workflows\build-and-publish-master.yml = .github\workflows\build-and-publish-master.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3EC3D437-524E-4A5C-9E2F-B4645D723C6E} = {D4B5A2FA-1365-4715-9CF2-7AA8668848BB}
 		{BBAFEB86-6753-4C8A-90E8-7F5F91FDE3CA} = {D4B5A2FA-1365-4715-9CF2-7AA8668848BB}
+		{0B50048A-805A-4D94-940C-E4F97E14B8AC} = {DC0D3B24-BE32-4B89-8839-6AEC465CEDB3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7DC2B9A0-C7FA-43F8-86F9-870810D778FE}
