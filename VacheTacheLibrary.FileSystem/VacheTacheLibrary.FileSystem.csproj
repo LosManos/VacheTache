@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.1.2</Version>
+    <Version>2.0.0</Version>
     <Description>VacheTacheLibrary.FileSystem is a library for creating files, typically in a scenario for automatic testing.</Description>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Summary>Library for creating files for test purpose.</Summary>
@@ -9,8 +9,8 @@
     <PackageId>VacheTacheLibrary.FileSystem</PackageId>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>LGPLv3</Copyright>
-    <PackageLicenseUrl>https://www.gnu.org/licenses/lgpl-3.0.txt</PackageLicenseUrl>
+    <Copyright>LGPLv3+NoEvil</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/LosManos/VacheTache/master/License.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/LosManos/VacheTache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/LosManos/VacheTache</RepositoryUrl>
     <Authors>LosManos</Authors>
