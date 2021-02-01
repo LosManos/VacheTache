@@ -1,4 +1,4 @@
-name: build-and-publish-master
+name: build-and-publish-master-filesystem
 
 on:
   push:
@@ -24,6 +24,6 @@ jobs:
     - name: Publish
       uses: brandedoutcast/publish-nuget@v2
       with:
-          PROJECT_FILE_PATH: VacheTacheLibrary/VacheTacheLibrary.csproj
+          PROJECT_FILE_PATH: VacheTacheLibrary.FileSystem/VacheTacheLibrary.FileSystem.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           
