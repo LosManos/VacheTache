@@ -1,6 +1,6 @@
 # VacheTache
 
-Version 1.1.3  
+Version 2.0.0  
 
 ## VacheTache class
 
@@ -26,11 +26,13 @@ Technically it is really just a descendant of `VacheTache` with a nifty construc
 https://www.nuget.org/packages/VacheTache/
 
 ## License
-This library is licensed under LGPLv3 license.  
+This library is licensed under [LGPLv3+NoEvil license](https://raw.githubusercontent.com/LosManos/VacheTache/master/License.txt).  
 This means that you are free to use this library in your (commercial) product as long as  you
 1) attach the code for VacheTache
 1) and any updates you have made to VacheTache
 1) and the license for VacheTache  
+1) and not use the library with a company that sells or buys munition
+1) and not use the library with a company in a country  that allows capital punishment
 
 to every customer of your (commercial) product.  
 Your existing (commercial) product is not affected.
